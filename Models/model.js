@@ -15,9 +15,10 @@ const studentSchema = new mongoose.Schema({
     required: true,
   },
   homeworks: {
-    type: Array,
+    type: Object,
     required: true,
   },
+
   teachers: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -46,12 +47,31 @@ const teacherSchema = new mongoose.Schema({
       ref: "Student",
     },
   ],
+  // the task that student assign to the teacher
   assignedTasks: {
     type: Object,
   },
 });
 
 // Define the Organization schema
+const customRoleSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  roleName: {
+    type: String,
+    required: true,
+  },
+  accesses: {
+    type: Array, // ["add student", "delete student"]
+    required: true,
+  },
+});
 const organizationOwnerSchema = new mongoose.Schema({
   username: {
     type: String,
