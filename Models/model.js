@@ -18,7 +18,10 @@ const studentSchema = new mongoose.Schema({
     type: Object,
     required: true,
   },
-
+  accesses: {
+    type: Array, // ["add student", "delete student"]
+    required: true,
+  },
   teachers: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -39,6 +42,10 @@ const teacherSchema = new mongoose.Schema({
   },
   classes: {
     type: Array,
+    required: true,
+  },
+  accesses: {
+    type: Array, // ["add student", "delete student"]
     required: true,
   },
   students: [
@@ -72,6 +79,7 @@ const customRoleSchema = new mongoose.Schema({
     required: true,
   },
 });
+
 const organizationOwnerSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -79,6 +87,10 @@ const organizationOwnerSchema = new mongoose.Schema({
   },
   password: {
     type: String,
+    required: true,
+  },
+  accesses: {
+    type: Array, // ["add student", "delete student"]
     required: true,
   },
   students: [
@@ -101,10 +113,13 @@ const Student = mongoose.model("Student", studentSchema);
 // Create the Teacher model
 const Teacher = mongoose.model("Teacher", teacherSchema);
 
+// Create the CustomRole model
+const customRole = mongoose.model("CustomRole", customRoleSchema);
+
 // Create the OrganizationOwner model
 const OrganizationOwner = mongoose.model(
   "Organization",
   organizationOwnerSchema
 );
 
-module.exports = { Student, Teacher, OrganizationOwner };
+module.exports = { Student, Teacher, customRole, OrganizationOwner };
