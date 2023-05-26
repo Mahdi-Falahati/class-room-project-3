@@ -15,7 +15,12 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import PasswordIcon from "@mui/icons-material/Password";
 
+import { useState } from "react";
+
 export default function Login() {
+  const [value, setValue] = useState(options[0]);
+  const [inputValue, setInputValue] = useState("");
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -34,11 +39,7 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -76,6 +77,15 @@ export default function Login() {
 
               <Grid item xs={12}>
                 <Autocomplete
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                  inputValue={inputValue}
+                  onInputChange={(event, newInputValue) => {
+                    setInputValue(newInputValue);
+                  }}
+                  options={options}
                   renderInput={(params) => (
                     <TextField {...params} label="Who Are You" />
                   )}
@@ -116,7 +126,6 @@ function Copyright(props) {
     </Typography>
   );
 }
-
 
 const theme = createTheme();
 const options = ["Admin", "Teacher", "Student"];
