@@ -15,11 +15,25 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import PasswordIcon from "@mui/icons-material/Password";
 
-import { useState } from "react";
+import { useState, useReducer } from "react";
 
 export default function Login() {
   const [value, setValue] = useState(options[0]);
   const [inputValue, setInputValue] = useState("");
+  const [data, dispatchInputData] = useReducer(formReducer, initialValue);
+
+  const userNameHandler = (e) => {
+    dispatchInputData({ type: ActionType.UserName, value: e.target.value });
+  };
+  const passwordHandler = (e) => {
+    dispatchInputData({ type: ActionType.Password, value: e.target.value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(data);
+    console.log(inputValue);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -39,10 +53,17 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  value={data.userName}
+                  onChange={userNameHandler}
                   required
                   fullWidth
                   id="UserName"
@@ -60,8 +81,10 @@ export default function Login() {
 
               <Grid item xs={12}>
                 <TextField
+                  onChange={passwordHandler}
                   required
                   fullWidth
+                  value={data.password}
                   id="Password"
                   label="Password"
                   InputProps={{
@@ -129,3 +152,24 @@ function Copyright(props) {
 
 const theme = createTheme();
 const options = ["Admin", "Teacher", "Student"];
+
+const ActionType = {
+  UserName: "__UserName",
+  Password: "__Password",
+};
+
+const formReducer = (state, action) => {
+  switch (action.type) {
+    case ActionType.UserName:
+      return { ...state, userName: action.value };
+    case ActionType.Password:
+      return { ...state, password: action.value };
+    default:
+      break;
+  }
+};
+
+const initialValue = {
+  userName: "",
+  password: "",
+};
