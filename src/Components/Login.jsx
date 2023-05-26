@@ -3,36 +3,120 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
-
-
-const theme = createTheme();
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockPersonIcon from "@mui/icons-material/LockPerson";
+import LoginIcon from "@mui/icons-material/Login";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import InputAdornment from "@mui/material/InputAdornment";
+import PasswordIcon from "@mui/icons-material/Password";
 
 export default function Login() {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockPersonIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Login
+          </Typography>
+          <Box
+            component="form"
+            noValidate
+            sx={{ mt: 3 }}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="UserName"
+                  label="Email Address Or UserName"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AccountCircle />
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="standard"
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="Password"
+                  label="Password"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <PasswordIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="standard"
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <Autocomplete
+                  renderInput={(params) => (
+                    <TextField {...params} label="Who Are You" />
+                  )}
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, borderRadius: "15px", letterSpacing: "2px" }}
+              endIcon={<LoginIcon />}
+            >
+              Sign In
+            </Button>
+          </Box>
+        </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
-  )
+  );
 }
 
 function Copyright(props) {
-    return (
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        align="center"
-        {...props}
-      >
-        {"Copyright © "}
-        <Link color="inherit" href="http://localhost:3000/">
-          Class Project
-        </Link>{" "}
-        {new Date().getFullYear()}
-        {"."}
-      </Typography>
-    );
-  }
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="http://localhost:3000/">
+        Class Project
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
+
+const theme = createTheme();
+const options = ["Admin", "Teacher", "Student"];
