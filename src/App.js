@@ -1,9 +1,10 @@
 import Login from "./Components/Login";
-
+import Owner from "./Components/Owner";
 
 function App() {
   return (
-   <Login/>
+    //  <Login/>
+    <Owner />
   );
 }
 
