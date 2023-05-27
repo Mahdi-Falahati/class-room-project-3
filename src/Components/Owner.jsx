@@ -4,6 +4,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+import OwnerContent from "./OwnerContent";
 
 export default function Owner() {
   const defaultPropsOrganistion = {
@@ -26,7 +27,7 @@ export default function Owner() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container columns={12} sx={{minHeight:"97vh"}}>
+      <Grid container columns={12} sx={{ minHeight: "97vh" }}>
         <Grid
           item
           xs={12}
@@ -35,7 +36,7 @@ export default function Owner() {
             display: "flex",
             alignItems: "center",
             flexDirection: "column",
-            justifyContent:"center"
+            justifyContent: "center",
           }}
         >
           <Autocomplete
@@ -65,7 +66,7 @@ export default function Owner() {
                 color: "gray",
                 borderBottom: "1px solid gray",
                 borderRadius: "0px",
-                mx:1
+                mx: 1,
               }}
               size="large"
               endIcon={<ArrowCircleRightIcon />}
@@ -77,7 +78,7 @@ export default function Owner() {
                 color: "gray",
                 borderBottom: "1px solid gray",
                 borderRadius: "0px",
-                mx:1
+                mx: 1,
               }}
               size="large"
               endIcon={<ArrowCircleRightIcon />}
@@ -86,8 +87,18 @@ export default function Owner() {
             </Button>
           </Box>
         </Grid>
-        <Grid item xs={12} sm={8} sx={{ background: "gold" }}>
-          xs=8
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <OwnerContent />
         </Grid>
       </Grid>
     </Box>
