@@ -34,14 +34,13 @@ export default function Owner() {
           sm={4}
           sx={{
             display: "flex",
-            alignItems: "center",
             flexDirection: "column",
             justifyContent: "center",
           }}
         >
           <Autocomplete
             onChange={organistionValueHandler}
-            sx={{ padding: "10px", width: "280px" }}
+            sx={{ m: 1 }}
             {...defaultPropsOrganistion}
             id="auto-highlight"
             autoHighlight
@@ -52,7 +51,7 @@ export default function Owner() {
 
           <Autocomplete
             onChange={ClassesValueHandler}
-            sx={{ padding: "10px", width: "280px" }}
+            sx={{ m: 1 }}
             {...defaultPropsClasses}
             id="auto-highlight"
             autoHighlight
@@ -60,13 +59,21 @@ export default function Owner() {
               <TextField {...params} label="Classes" variant="standard" />
             )}
           />
-          <Box>
+          <Box
+            sx={{
+              my: 4,
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-around",
+              mx: 1,
+            }}
+          >
             <Button
               sx={{
                 color: "gray",
                 borderBottom: "1px solid gray",
                 borderRadius: "0px",
-                mx: 1,
+                marginBottom:"10px",
               }}
               size="large"
               endIcon={<ArrowCircleRightIcon />}
@@ -78,7 +85,7 @@ export default function Owner() {
                 color: "gray",
                 borderBottom: "1px solid gray",
                 borderRadius: "0px",
-                mx: 1,
+                marginBottom:"10px",
               }}
               size="large"
               endIcon={<ArrowCircleRightIcon />}
