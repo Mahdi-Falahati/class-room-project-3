@@ -4,12 +4,21 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
 export default function Owner() {
-  const defaultProps = {
+  const defaultPropsOrganistion = {
     options: Organistion,
     getOptionLabel: (option) => option,
   };
 
+  const defaultPropsClasses = {
+    options: Classes,
+    getOptionLabel: (option) => option,
+  };
+
   const organistionValueHandler = (e) => {
+    console.log(e.target.innerText);
+  };
+
+  const ClassesValueHandler = (e) => {
     console.log(e.target.innerText);
   };
 
@@ -20,16 +29,31 @@ export default function Owner() {
           item
           xs={12}
           sm={4}
-          sx={{ display: "flex", justifyContent: "center" }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
         >
           <Autocomplete
             onChange={organistionValueHandler}
             sx={{ padding: "10px", width: "280px" }}
-            {...defaultProps}
+            {...defaultPropsOrganistion}
             id="auto-highlight"
             autoHighlight
             renderInput={(params) => (
               <TextField {...params} label="Organization" variant="standard" />
+            )}
+          />
+
+          <Autocomplete
+            onChange={ClassesValueHandler}
+            sx={{ padding: "10px", width: "280px" }}
+            {...defaultPropsClasses}
+            id="auto-highlight"
+            autoHighlight
+            renderInput={(params) => (
+              <TextField {...params} label="Classes" variant="standard" />
             )}
           />
         </Grid>
@@ -42,3 +66,4 @@ export default function Owner() {
 }
 
 const Organistion = ["APS", "Youtube", "Google"];
+const Classes = ["APS-3a", "APS-3b", "APS-3c", "APS-3e"];
