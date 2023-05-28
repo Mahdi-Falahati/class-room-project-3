@@ -12,6 +12,7 @@ import { useState } from "react";
 
 export default function AddPerson({ title, Organization, Class }) {
   const [open, setOpen] = useState(false);
+  const [term, setTerm] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,6 +20,10 @@ export default function AddPerson({ title, Organization, Class }) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleTerm = (e) => {
+    setTerm(e.target.value);
   };
 
   const handleAddPerson = () => {
@@ -44,6 +49,8 @@ export default function AddPerson({ title, Organization, Class }) {
         <DialogContent sx={{ width: "300px" }}>
           <TextField
             autoFocus
+            onChange={handleTerm}
+            value={term}
             margin="dense"
             id="name"
             label="Name"
