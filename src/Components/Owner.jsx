@@ -31,16 +31,14 @@ export default function Owner() {
         <Grid
           item
           xs={12}
-          sm={4}
           sx={{
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            justifyContent: "space-around",
           }}
         >
           <Autocomplete
             onChange={organistionValueHandler}
-            sx={{ m: 1 }}
+            sx={{ m: 1, width: "280px" }}
             {...defaultPropsOrganistion}
             id="auto-highlight"
             autoHighlight
@@ -51,7 +49,7 @@ export default function Owner() {
 
           <Autocomplete
             onChange={ClassesValueHandler}
-            sx={{ m: 1 }}
+            sx={{ m: 1, width: "280px" }}
             {...defaultPropsClasses}
             id="auto-highlight"
             autoHighlight
@@ -59,45 +57,10 @@ export default function Owner() {
               <TextField {...params} label="Classes" variant="standard" />
             )}
           />
-          <Box
-            sx={{
-              my: 4,
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-around",
-              mx: 1,
-            }}
-          >
-            <Button
-              sx={{
-                color: "gray",
-                borderBottom: "1px solid gray",
-                borderRadius: "0px",
-                marginBottom:"10px",
-              }}
-              size="large"
-              endIcon={<ArrowCircleRightIcon />}
-            >
-              Teachers
-            </Button>
-            <Button
-              sx={{
-                color: "gray",
-                borderBottom: "1px solid gray",
-                borderRadius: "0px",
-                marginBottom:"10px",
-              }}
-              size="large"
-              endIcon={<ArrowCircleRightIcon />}
-            >
-              Students
-            </Button>
-          </Box>
         </Grid>
         <Grid
           item
           xs={12}
-          sm={8}
           sx={{
             display: "flex",
             alignItems: "center",
