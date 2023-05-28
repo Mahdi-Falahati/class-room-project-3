@@ -7,6 +7,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
 import { useState } from "react";
+import AddPerson from "./AddPerson";
+import { Grid } from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,23 +58,32 @@ export default function OwnerContent() {
     if (value === 0) {
       return (
         <TabPanel value={value} index={0}>
-          <List
-            sx={{
-              width: "100%",
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-around",
-              bgcolor: "background.paper",
-            }}
-          >
-            {fakeData?.map((info, index) => (
-              <PersonInfo
-                key={index}
-                OnDelete={deleteHandler}
-                Name={info.name}
-                ID={info.id}
-              />
-            ))}
+          <List>
+            <Grid container columns={12}>
+              <Grid item xs={12} sx={{ textAlign: "center" }}>
+                <AddPerson title="Add Teacher"/>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "space-around",
+                  bgcolor: "background.paper",
+                }}
+              >
+                {fakeData?.map((info, index) => (
+                  <PersonInfo
+                    key={index}
+                    OnDelete={deleteHandler}
+                    Name={info.name}
+                    ID={info.id}
+                  />
+                ))}
+              </Grid>
+            </Grid>
           </List>
         </TabPanel>
       );
