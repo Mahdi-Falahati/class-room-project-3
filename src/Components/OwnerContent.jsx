@@ -56,7 +56,13 @@ export default function OwnerContent() {
       return (
         <TabPanel value={value} index={0}>
           <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexWrap:"wrap",
+              justifyContent:"space-around",
+              bgcolor: "background.paper",
+            }}
           >
             {fakeData?.map((info, index) => (
               <PersonInfo
@@ -75,7 +81,7 @@ export default function OwnerContent() {
   };
 
   return (
-    <Box sx={{ width: "100%" ,minHeight:"80vh"}}>
+    <Box sx={{ width: "100%", minHeight: "80vh" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
@@ -95,5 +101,6 @@ const fakeData = [
   { name: "RC", id: "1" },
   { name: "Mahdi", id: "2" },
   { name: "Fateme", id: "3" },
-  { name: "Vesal", id: "4" },
+  { name: "Zahra", id: "4" },
+  { name: "Vesal", id: "5" },
 ];

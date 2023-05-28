@@ -13,12 +13,13 @@ export default function PersonContent({ Name, AvatarSrc = "", ID, OnDelete }) {
     OnDelete(e.target.id);
   };
   return (
-    <Box>
+    <Box sx={{ m: 2 }}>
       <ListItem
         sx={{
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
+          width: 360,
         }}
       >
         <ListItemAvatar>
