@@ -3,9 +3,9 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
 
 import { useState } from "react";
 
@@ -31,8 +31,10 @@ export default function AddPerson({ title }) {
         {title}
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{title}</DialogTitle>
-        <DialogContent>
+        <DialogTitle sx={{ display: "flex", alignItems: "center" }}>
+          {title} <GroupAddIcon sx={{marginLeft:"5px"}} />
+        </DialogTitle>
+        <DialogContent sx={{ width: "300px" }}>
           <TextField
             autoFocus
             margin="dense"
