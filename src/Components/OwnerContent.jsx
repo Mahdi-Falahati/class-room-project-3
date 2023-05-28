@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
-import List from "@mui/material/List";
 import PersonInfo from "./PersonInfo";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+
 import { useState } from "react";
 
 function TabPanel(props) {
@@ -59,8 +60,8 @@ export default function OwnerContent() {
             sx={{
               width: "100%",
               display: "flex",
-              flexWrap:"wrap",
-              justifyContent:"space-around",
+              flexWrap: "wrap",
+              justifyContent: "space-around",
               bgcolor: "background.paper",
             }}
           >
