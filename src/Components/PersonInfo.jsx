@@ -8,9 +8,12 @@ import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/material";
 
-export default function PersonContent({ Name, AvatarSrc = "", ID }) {
+export default function PersonContent({ Name, AvatarSrc = "", ID, OnDelete }) {
+  const deleteHandler = (e) => {
+    OnDelete(e.target.id);
+  };
   return (
-    <Box id={ID}>
+    <Box>
       <ListItem
         sx={{
           display: "flex",
@@ -23,7 +26,7 @@ export default function PersonContent({ Name, AvatarSrc = "", ID }) {
         </ListItemAvatar>
         <ListItemText
           secondary={
-            <Box>
+            <>
               <Typography
                 sx={{
                   display: "inline",
@@ -38,7 +41,7 @@ export default function PersonContent({ Name, AvatarSrc = "", ID }) {
               >
                 {Name}
               </Typography>
-            </Box>
+            </>
           }
         />
         <Button
@@ -51,6 +54,8 @@ export default function PersonContent({ Name, AvatarSrc = "", ID }) {
           size="small"
           endIcon={<DeleteIcon />}
           color="secondary"
+          onClick={deleteHandler}
+          id={ID}
         >
           Delete
         </Button>
