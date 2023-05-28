@@ -61,7 +61,11 @@ export default function OwnerContent() {
           <List>
             <Grid container columns={12}>
               <Grid item xs={12} sx={{ textAlign: "center" }}>
-                <AddPerson title="Add Teacher"/>
+                <AddPerson
+                  title="Add Teacher"
+                  Organization="APS"
+                  Class="APS3E"
+                />
               </Grid>
               <Grid
                 item

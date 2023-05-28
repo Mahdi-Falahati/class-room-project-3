@@ -6,10 +6,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import Typography from "@mui/material/Typography";
 
 import { useState } from "react";
 
-export default function AddPerson({ title }) {
+export default function AddPerson({ title, Organization, Class }) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -17,6 +18,10 @@ export default function AddPerson({ title }) {
   };
 
   const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleAddPerson = () => {
     setOpen(false);
   };
 
@@ -30,10 +35,12 @@ export default function AddPerson({ title }) {
       >
         {title}
       </Button>
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle sx={{ display: "flex", alignItems: "center" }}>
-          {title} <GroupAddIcon sx={{marginLeft:"5px"}} />
+          {title} <GroupAddIcon sx={{ marginLeft: "5px" }} />
         </DialogTitle>
+
         <DialogContent sx={{ width: "300px" }}>
           <TextField
             autoFocus
@@ -44,10 +51,13 @@ export default function AddPerson({ title }) {
             fullWidth
             variant="standard"
           />
+          <Typography variant="overline" display="block" gutterBottom>
+            {Organization} - {Class}
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Add</Button>
+          <Button onClick={handleAddPerson}>Add</Button>
         </DialogActions>
       </Dialog>
     </div>
