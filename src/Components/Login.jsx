@@ -21,6 +21,11 @@ export default function Login() {
   const [value, setValue] = useState(options[0]);
   const [inputValue, setInputValue] = useState("");
   const [data, dispatchInputData] = useReducer(formReducer, initialValue);
+  const [error, setError] = useState({
+    username: false,
+    password: false,
+    rolde: false,
+  });
 
   const userNameHandler = (e) => {
     dispatchInputData({ type: ActionType.UserName, value: e.target.value });
@@ -31,8 +36,16 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(data);
-    console.log(inputValue);
+    if (inputValue.trim() && data.userName.trim() && data.password.trim()) {
+      setError({ username: false, password: false, role: false });
+
+    } else if (!data.userName.trim()) {
+      setError({ ...error, username: true });
+    } else if (!data.password.trim()) {
+      setError({ ...error, username: false, password: true });
+    } else {
+      setError({ username: false, password: false, role: true });
+    }
   };
 
   return (
@@ -66,6 +79,7 @@ export default function Login() {
                   onChange={userNameHandler}
                   required
                   fullWidth
+                  error={error.username}
                   id="UserName"
                   label="Email Address Or UserName"
                   InputProps={{
@@ -84,6 +98,7 @@ export default function Login() {
                   onChange={passwordHandler}
                   required
                   fullWidth
+                  error={error.password}
                   value={data.password}
                   id="Password"
                   label="Password"
@@ -110,7 +125,11 @@ export default function Login() {
                   }}
                   options={options}
                   renderInput={(params) => (
-                    <TextField {...params} label="Who Are You" />
+                    <TextField
+                      error={error.role}
+                      {...params}
+                      label="Who Are You"
+                    />
                   )}
                 />
               </Grid>
