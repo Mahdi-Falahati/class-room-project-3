@@ -9,6 +9,11 @@ export default function Teacher() {
     options: Organistion,
     getOptionLabel: (option) => option,
   };
+
+  const organistionValueHandler = (e) => {
+    console.log(e.target.innerText);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container columns={12} sx={{ minHeight: "97vh" }}>
@@ -22,6 +27,7 @@ export default function Teacher() {
           }}
         >
           <Autocomplete
+            onChange={organistionValueHandler}
             sx={{ m: 1, width: "280px" }}
             {...defaultPropsOrganistion}
             id="auto-highlight"
@@ -48,3 +54,4 @@ export default function Teacher() {
 }
 
 const Organistion = ["APS", "Youtube", "Google"];
+const Classes = ["APS-3a", "APS-3b", "APS-3c", "APS-3e"];
