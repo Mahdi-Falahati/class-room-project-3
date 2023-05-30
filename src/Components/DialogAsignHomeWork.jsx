@@ -4,11 +4,12 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import AssistantIcon from "@mui/icons-material/Assistant";
 import { useState } from "react";
 import { Autocomplete, Typography } from "@mui/material";
 
-export default function DialogAsignHomeWork({Organization, Class}) {
+export default function DialogAsignHomeWork({ Organization, Class }) {
   const [open, setOpen] = useState(false);
   const [term, setTerm] = useState("");
 
@@ -49,7 +50,10 @@ export default function DialogAsignHomeWork({Organization, Class}) {
         Grade
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Home Work</DialogTitle>
+        <DialogTitle>
+          Grade To Home Work
+          <AssistantIcon sx={{ marginLeft: "5px" }} />
+        </DialogTitle>
         <DialogContent>
           <Autocomplete
             onChange={homeworkValueHandler}
