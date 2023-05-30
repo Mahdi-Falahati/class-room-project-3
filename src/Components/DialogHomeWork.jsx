@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import { useState } from "react";
 import { Autocomplete, Typography } from "@mui/material";
 
@@ -43,10 +43,10 @@ export default function DialogHomeWork({Organization, Class}) {
           borderBottom: "1px solid",
           borderRadius: "0px",
         }}
-        endIcon={<AddCircleIcon />}
+        endIcon={<AssignmentTurnedInIcon />}
         onClick={handleClickOpen}
       >
-        Add HomeWork
+        Grade
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Home Work</DialogTitle>
