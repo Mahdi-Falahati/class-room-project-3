@@ -1,6 +1,7 @@
 import Student from "../Students";
 import AddPerson from "./AddPerson";
 import { Box, Grid, List } from "@mui/material";
+import DialogAddHomeWork from "./DialogAddHomeWork";
 
 export default function StudentList() {
   const deleteHandler = (id) => {
@@ -22,7 +23,7 @@ export default function StudentList() {
             }}
           >
             <AddPerson title="Add Student" Organization="APS" Class="APS3E" />
-            <AddPerson title="Add HomeWork" Organization="APS" Class="APS3E" />
+            <DialogAddHomeWork Organization="APS" Class="APS3E" />
           </Grid>
           <Grid
             item
