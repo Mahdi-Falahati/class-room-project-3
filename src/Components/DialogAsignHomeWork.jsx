@@ -34,6 +34,10 @@ export default function DialogAsignHomeWork({ Organization, Class }) {
     console.log(e.target.innerText);
   };
 
+  const handleAssignGradeToHomeWrok = () => {
+    setOpen(false);
+  };
+
   return (
     <div>
       <Button
@@ -82,7 +86,7 @@ export default function DialogAsignHomeWork({ Organization, Class }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Assign</Button>
+          <Button onClick={handleAssignGradeToHomeWrok}>Assign</Button>
         </DialogActions>
       </Dialog>
     </div>
