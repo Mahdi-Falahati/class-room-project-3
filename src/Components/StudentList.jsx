@@ -1,7 +1,12 @@
+import Student from "../Students";
 import AddPerson from "./AddPerson";
 import { Box, Grid, List } from "@mui/material";
 
 export default function StudentList() {
+  const deleteHandler = (id) => {
+    console.log(fakeData.filter((person) => person.id !== id));
+  };
+
   return (
     <Box sx={{ width: "100%", minHeight: "80vh" }}>
       <List>
@@ -13,6 +18,7 @@ export default function StudentList() {
               display: "flex",
               justifyContent: "space-around",
               alignItems: "center",
+              flexWrap: "wrap",
             }}
           >
             <AddPerson title="Add Student" Organization="APS" Class="APS3E" />
@@ -28,7 +34,16 @@ export default function StudentList() {
               justifyContent: "space-around",
               bgcolor: "background.paper",
             }}
-          ></Grid>
+          >
+            {fakeData?.map((info, index) => (
+              <Student
+                key={index}
+                OnDelete={deleteHandler}
+                Name={info.name}
+                ID={info.id}
+              />
+            ))}
+          </Grid>
         </Grid>
       </List>
     </Box>
