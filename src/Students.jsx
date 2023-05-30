@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/material";
-import DialogHomeWork from "./Components/DialogHomeWork";
+import DialogAsignHomeWork from "./Components/DialogAsignHomeWork";
 
 export default function Student({ Name, AvatarSrc = "", ID, OnDelete }) {
   const deleteHandler = (e) => {
@@ -70,7 +70,7 @@ export default function Student({ Name, AvatarSrc = "", ID, OnDelete }) {
           >
             Delete
           </Button>
-          <DialogHomeWork Organization="APS" Class="APS3e"/>
+          <DialogAsignHomeWork Organization="APS" Class="APS3e"/>
         </Box>
       </ListItem>
       <Divider variant="inset" component="li" />

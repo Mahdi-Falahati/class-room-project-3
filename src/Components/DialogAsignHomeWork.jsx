@@ -8,7 +8,7 @@ import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import { useState } from "react";
 import { Autocomplete, Typography } from "@mui/material";
 
-export default function DialogHomeWork({Organization, Class}) {
+export default function DialogAsignHomeWork({Organization, Class}) {
   const [open, setOpen] = useState(false);
   const [term, setTerm] = useState("");
 
