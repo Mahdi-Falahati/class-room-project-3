@@ -3,10 +3,14 @@ import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
-
 export default function Teacher() {
   const defaultPropsOrganistion = {
     options: Organistion,
+    getOptionLabel: (option) => option,
+  };
+
+  const defaultPropsClasses = {
+    options: Classes,
     getOptionLabel: (option) => option,
   };
 
@@ -36,6 +40,15 @@ export default function Teacher() {
               <TextField {...params} label="Organization" variant="standard" />
             )}
           />
+          <Autocomplete
+            sx={{ m: 1, width: "280px" }}
+            {...defaultPropsClasses}
+            id="auto-highlight"
+            autoHighlight
+            renderInput={(params) => (
+              <TextField {...params} label="Classes" variant="standard" />
+            )}
+          />
         </Grid>
         <Grid
           item
@@ -46,8 +59,7 @@ export default function Teacher() {
             flexDirection: "column",
             justifyContent: "center",
           }}
-        >
-        </Grid>
+        ></Grid>
       </Grid>
     </Box>
   );
