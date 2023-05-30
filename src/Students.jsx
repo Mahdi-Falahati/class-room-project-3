@@ -8,8 +8,11 @@ import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/material";
 
-export default function Student({ Name, AvatarSrc = "", ID}) {
-
+export default function Student({ Name, AvatarSrc = "", ID, OnDelete }) {
+  const deleteHandler = (e) => {
+    OnDelete(e.target.id);
+  };
+  
   return (
     <Box sx={{ m: 2 }}>
       <ListItem
