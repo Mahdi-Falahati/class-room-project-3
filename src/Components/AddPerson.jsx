@@ -31,7 +31,7 @@ export default function AddPerson({ title, Organization, Class }) {
   };
 
   return (
-    <div>
+    <div style={{margin:"10px"}}>
       <Button
         variant="outlined"
         sx={{ width: "280px", borderRadius: "15px", letterSpacing: "2px" }}
