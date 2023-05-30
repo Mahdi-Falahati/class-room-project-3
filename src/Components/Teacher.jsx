@@ -18,6 +18,10 @@ export default function Teacher() {
     console.log(e.target.innerText);
   };
 
+  const ClassesValueHandler = (e) => {
+    console.log(e.target.innerText);
+  };
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container columns={12} sx={{ minHeight: "97vh" }}>
@@ -41,6 +45,7 @@ export default function Teacher() {
             )}
           />
           <Autocomplete
+            onChange={ClassesValueHandler}
             sx={{ m: 1, width: "280px" }}
             {...defaultPropsClasses}
             id="auto-highlight"
