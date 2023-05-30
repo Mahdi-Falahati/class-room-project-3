@@ -1,9 +1,13 @@
-import Login from "./Components/Login";
-
+// import Login from "./Components/Login";
+// import StudentContent from "./Components/StudentContent";
+import Student from "./Components/Student";
 
 function App() {
   return (
-   <Login/>
+    <>
+      {/* <Login />   */}
+      <Student />
+    </>
   );
 }
 
