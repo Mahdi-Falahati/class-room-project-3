@@ -4,15 +4,17 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import Typography from "@mui/material/Typography";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 import { useState } from "react";
 
-export default function AddPerson({ title, Organization, Class }) {
+export default function DialogAddHomeWork({ Organization, Class }) {
   const [open, setOpen] = useState(false);
   const [term, setTerm] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,24 +28,28 @@ export default function AddPerson({ title, Organization, Class }) {
     setTerm(e.target.value);
   };
 
-  const handleAddPerson = () => {
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleAddHomeWork = () => {
     setOpen(false);
   };
 
   return (
-    <div style={{margin:"10px"}}>
+    <div style={{ margin: "10px" }}>
       <Button
         variant="outlined"
         sx={{ width: "280px", borderRadius: "15px", letterSpacing: "2px" }}
-        endIcon={<PersonAddIcon />}
+        endIcon={<AddCircleIcon />}
         onClick={handleClickOpen}
       >
-        {title}
+        Add HomeWork
       </Button>
 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle sx={{ display: "flex", alignItems: "center" }}>
-          {title} <GroupAddIcon sx={{ marginLeft: "5px" }} />
+          Add HomeWork <BorderColorIcon sx={{ marginLeft: "5px" }} />
         </DialogTitle>
 
         <DialogContent sx={{ width: "300px" }}>
@@ -52,8 +58,19 @@ export default function AddPerson({ title, Organization, Class }) {
             onChange={handleTerm}
             value={term}
             margin="dense"
-            id="name"
-            label="Name"
+            id="title"
+            label="Title"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            onChange={handleDescription}
+            value={description}
+            margin="dense"
+            id="Description"
+            label="Description"
             type="text"
             fullWidth
             variant="standard"
@@ -64,7 +81,7 @@ export default function AddPerson({ title, Organization, Class }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleAddPerson}>Add</Button>
+          <Button onClick={handleAddHomeWork}>Add</Button>
         </DialogActions>
       </Dialog>
     </div>
