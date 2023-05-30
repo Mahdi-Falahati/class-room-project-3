@@ -37,8 +37,7 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (inputValue.trim() && data.userName.trim() && data.password.trim()) {
-      setError({ username: false, password: false, role: false });
-
+      setError({ username: false, password: false, role: false});
     } else if (!data.userName.trim()) {
       setError({ ...error, username: true });
     } else if (!data.password.trim()) {
