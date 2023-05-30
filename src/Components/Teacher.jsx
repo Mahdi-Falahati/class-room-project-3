@@ -4,6 +4,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import StudentList from "./StudentList";
 
 export default function Teacher() {
   const defaultPropsOrganistion = {
@@ -86,7 +87,9 @@ export default function Teacher() {
             flexDirection: "column",
             justifyContent: "center",
           }}
-        ></Grid>
+        >
+          <StudentList/>
+        </Grid>
       </Grid>
     </Box>
   );
