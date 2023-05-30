@@ -7,12 +7,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/material";
+import DialogHomeWork from "./Components/DialogHomeWork";
 
 export default function Student({ Name, AvatarSrc = "", ID, OnDelete }) {
   const deleteHandler = (e) => {
     OnDelete(e.target.id);
   };
-  
+
   return (
     <Box sx={{ m: 2 }}>
       <ListItem
@@ -20,7 +21,7 @@ export default function Student({ Name, AvatarSrc = "", ID, OnDelete }) {
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
-          width: 360,
+          flexWrap: "wrap",
         }}
       >
         <ListItemAvatar>
@@ -46,21 +47,31 @@ export default function Student({ Name, AvatarSrc = "", ID, OnDelete }) {
             </>
           }
         />
-        <Button
+        <Box
           sx={{
             display: "flex",
-            lineHeight: "30px",
-            borderBottom: "1px solid",
-            borderRadius: "0px",
+            flexWrap: "wrap",
+            justifyContent: "center",
           }}
-          size="small"
-          endIcon={<DeleteIcon />}
-          color="secondary"
-          onClick={deleteHandler}
-          id={ID}
         >
-          Delete
-        </Button>
+          <Button
+            sx={{
+              display: "flex",
+              lineHeight: "30px",
+              borderBottom: "1px solid",
+              borderRadius: "0px",
+              mx: 3,
+            }}
+            size="small"
+            endIcon={<DeleteIcon />}
+            color="secondary"
+            onClick={deleteHandler}
+            id={ID}
+          >
+            Delete
+          </Button>
+          <DialogHomeWork Organization="APS" Class="APS3e"/>
+        </Box>
       </ListItem>
       <Divider variant="inset" component="li" />
     </Box>
