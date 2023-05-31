@@ -13,4 +13,23 @@ const createClass = async (req, res) => {
   }
 };
 
-module.exports = { createClass };
+// @desc - delete a class
+// @route - DELETE '/classes'
+// @access - public
+const deleteClass = async (req, res) => {
+  const { id } = req?.body;
+  if (!id) return res.status(400).json({ message: "Class id is required" });
+  try {
+    const myClass = await Class.findOne({ _id: id });
+    if (!myClass)
+      return res
+        .status(204)
+        .json({ message: `no matches class with ID: ${id}.` });
+    Class.deleteClassAndRemoveFromOrganization(id);
+    res.json(myClass);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { createClass, deleteClass };

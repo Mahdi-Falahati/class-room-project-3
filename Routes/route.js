@@ -1,5 +1,5 @@
 const express = require("express");
-const { createClass } = require("../Controller/classController");
+const { createClass, deleteClass } = require("../Controller/classController");
 const {
   createOrganization,
   deleteOrganization,
@@ -32,6 +32,6 @@ router
   .route("/organizations")
   .post(createOrganization)
   .delete(deleteOrganization);
-router.route("/classes").post(createClass);
+router.route("/classes").post(createClass).delete(deleteClass);
 
 module.exports = router;
