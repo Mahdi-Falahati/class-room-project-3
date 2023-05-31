@@ -12,16 +12,26 @@ const {
 const {
   getStudent,
   createStudent,
+  deleteStudent,
 } = require("../Controller/studentController");
 const {
   getTeacher,
   createTeacher,
+  deleteTeacher,
 } = require("../Controller/TeacherController");
 
 const router = express.Router();
 
-router.route("/student").get(getStudent).post(createStudent);
-router.route("/teacher").get(getTeacher).post(createTeacher);
+router
+  .route("/student")
+  .get(getStudent)
+  .post(createStudent)
+  .delete(deleteStudent);
+router
+  .route("/teacher")
+  .get(getTeacher)
+  .post(createTeacher)
+  .delete(deleteTeacher);
 router
   .route("/organizationOwner")
   .get(getOwner)
