@@ -16,6 +16,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import PasswordIcon from "@mui/icons-material/Password";
 
 import { useState, useReducer } from "react";
+import { async } from "q";
+import { getOrgan } from "../API/API";
 
 export default function Login() {
   const [value, setValue] = useState(options[0]);
@@ -24,7 +26,7 @@ export default function Login() {
   const [error, setError] = useState({
     username: false,
     password: false,
-    rolde: false,
+    role: false,
   });
 
   const userNameHandler = (e) => {
@@ -45,7 +47,19 @@ export default function Login() {
     } else {
       setError({ username: false, password: false, role: true });
     }
+    console.log(inputValue);
   };
+
+
+  const login=async()=>{
+    if(inputValue==="Admin"){
+     const organData = await getOrgan("/organizationOwner",data);
+     console.log(organData);
+    }
+    
+  }
+
+
 
   return (
     <ThemeProvider theme={theme}>
