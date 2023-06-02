@@ -14,17 +14,24 @@ import LoginIcon from "@mui/icons-material/Login";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import PasswordIcon from "@mui/icons-material/Password";
-
 import { useState, useReducer } from "react";
+import { getAllOrgan } from "../API/API";
+import { useNavigate } from "react-router-dom";
+import {useAuth} from "../Utils/Auth"
+import PrivateRoutes from "../Utils/PrivateRoutes";
+
 
 export default function Login() {
+  const [user,setUser]=useState('');
+  const auth=useAuth();
+  const navigate=useNavigate();
   const [value, setValue] = useState(options[0]);
   const [inputValue, setInputValue] = useState("");
   const [data, dispatchInputData] = useReducer(formReducer, initialValue);
   const [error, setError] = useState({
     username: false,
     password: false,
-    rolde: false,
+    role: false,
   });
 
   const userNameHandler = (e) => {
@@ -45,7 +52,34 @@ export default function Login() {
     } else {
       setError({ username: false, password: false, role: true });
     }
+    // console.log(inputValue);
+    getData(data)
+    
   };
+  const changePage=(path)=>{
+  console.log(user);
+   console.log(auth);
+   navigate("/Owner");
+  }
+  const getData=async(data)=>{
+    // console.log(data);
+    switch (inputValue) {
+      case "Admin":
+           const result=await getAllOrgan("/organizationOwnerP",{username:data.userName,password:data.password});
+           if (result._id) {
+           setUser(true);
+           console.log(user);
+           changePage("Owner")
+           }if(!auth.loggedIn){
+            console.log("asd");
+            navigate("/")
+           }
+        break;
+    
+      default:
+        break;
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
