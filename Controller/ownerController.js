@@ -1,11 +1,10 @@
 const Owner = require("../Models/ownerModel");
 
 // @desc - get a organization owner
-// @route - GET '/organizationOwner'
+// @route - Post '/organizationOwnerP'
 // @access - public
 const getOwner = async (req, res) => {
   const { username, password } = req?.body;
-
   try {
     const allOwner = await Owner.find().populate({
       path: "organizations",
@@ -21,6 +20,7 @@ const getOwner = async (req, res) => {
         },
       },
     });
+
     if (!allOwner)
       return res.status(204).json({ message: "No organization owner found" });
 

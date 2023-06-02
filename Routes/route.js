@@ -24,9 +24,11 @@ router.route("/student").get(getStudent).post(createStudent);
 router.route("/teacher").get(getTeacher).post(createTeacher);
 router
   .route("/organizationOwner")
-  .get(getOwner)
   .post(createOwner)
   .put(updateOwner);
+router
+  .route("/organizationOwnerP")
+  .post(getOwner)
 
 router
   .route("/organizations")
