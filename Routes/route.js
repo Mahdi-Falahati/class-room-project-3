@@ -7,7 +7,7 @@ const {
 const {
   createOwner,
   updateOwner,
-  getOwner,
+  getOrganOwner,
 } = require("../Controller/ownerController");
 const {
   getStudent,
@@ -16,19 +16,29 @@ const {
 const {
   getTeacher,
   createTeacher,
-} = require("../Controller/TeacherController");
+} = require("../Controller/teacherController");
 
 const router = express.Router();
 
-router.route("/student").get(getStudent).post(createStudent);
-router.route("/teacher").get(getTeacher).post(createTeacher);
+router
+  .route("/createStudent")
+  .post(createStudent);
+router
+  .route("/createTeacher")
+  .post(createTeacher);
+router
+  .route("/getStudent")
+  .post(getStudent)
+router
+  .route("/getTeacher")
+  .post(getTeacher)
 router
   .route("/organizationOwner")
   .post(createOwner)
   .put(updateOwner);
 router
-  .route("/organizationOwnerP")
-  .post(getOwner)
+  .route("/getOrganizationOwner")
+  .post(getOrganOwner)
 
 router
   .route("/organizations")

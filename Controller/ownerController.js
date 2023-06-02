@@ -1,9 +1,9 @@
 const Owner = require("../Models/ownerModel");
 
 // @desc - get a organization owner
-// @route - Post '/organizationOwnerP'
+// @route - Post '/getOrganizationOwner'
 // @access - public
-const getOwner = async (req, res) => {
+const getOrganOwner = async (req, res) => {
   const { username, password } = req?.body;
   try {
     const allOwner = await Owner.find().populate({
@@ -70,7 +70,7 @@ const updateOwner = async (req, res) => {
   }
 };
 
-module.exports = { getOwner, createOwner, updateOwner };
+module.exports = { getOrganOwner, createOwner, updateOwner };
 
 /***************** main owner can delete this owner *****************/
 // @desc - delete a organization owner
