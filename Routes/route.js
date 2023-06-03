@@ -30,7 +30,7 @@ router
 router
   .route("/teacher")
   .delete(deleteTeacher);
-
+router
   .route("/createStudent")
   .post(createStudent);
 router
