@@ -1,7 +1,7 @@
 const Teacher = require("../Models/teacherModel");
 
 // @desc - get a teacher
-// @route - GET '/teacher'
+// @route - Post '/getTeacher'
 // @access - public
 const getTeacher = async (req, res) => {
   const { username, password } = req?.body;

@@ -1,11 +1,10 @@
 const Owner = require("../Models/ownerModel");
 
 // @desc - get a organization owner
-// @route - GET '/organizationOwner'
+// @route - Post '/getOrganizationOwner'
 // @access - public
-const getOwner = async (req, res) => {
+const getOrganOwner = async (req, res) => {
   const { username, password } = req?.body;
-
   try {
     const allOwner = await Owner.find().populate({
       path: "organizations",
@@ -21,6 +20,7 @@ const getOwner = async (req, res) => {
         },
       },
     });
+
     if (!allOwner)
       return res.status(204).json({ message: "No organization owner found" });
 
@@ -70,7 +70,7 @@ const updateOwner = async (req, res) => {
   }
 };
 
-module.exports = { getOwner, createOwner, updateOwner };
+module.exports = { getOrganOwner, createOwner, updateOwner };
 
 /***************** main owner can delete this owner *****************/
 // @desc - delete a organization owner
