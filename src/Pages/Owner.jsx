@@ -3,8 +3,13 @@ import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import OwnerContent from "./OwnerContent";
+import SubHeader from "./SubHeader";
+import SelectOptions from "./SelectOptions";
+import { useState } from "react";
 
 export default function Owner() {
+  const [isOrgan, setIsOrgan] = useState(false);
+  const [isClass, setIsClass] = useState(false);
   const defaultPropsOrganistion = {
     options: Organistion,
     getOptionLabel: (option) => option,
@@ -17,10 +22,23 @@ export default function Owner() {
 
   const organistionValueHandler = (e) => {
     console.log(e.target.innerText);
+    if (e.target.innerText) {
+      setIsOrgan(true);
+      setIsClass(false);
+    } else {
+      setIsOrgan(false);
+    }
   };
 
   const ClassesValueHandler = (e) => {
     console.log(e.target.innerText);
+    if (e.target.innerText) {
+      setIsClass(true);
+      setIsOrgan(false);
+    } else {
+      setIsOrgan(true);
+      setIsClass(false);
+    }
   };
 
   return (
