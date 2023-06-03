@@ -44,4 +44,25 @@ teacherSchema.pre("save", async function (next) {
 
 const Teacher = mongoose.model("Teacher", teacherSchema);
 
+Teacher.deleteTeacherAndRemoveFromClass = async function (teacherId) {
+  const teacher = await Teacher.findOneAndDelete({ _id: teacherId });
+
+  if (!teacher) {
+    throw new Error("Teacher not found.");
+  }
+
+  const classPromises = teacher.classes.map((classId) =>
+    Class.findById(classId)
+  );
+
+  const classes = await Promise.all(classPromises);
+
+  classes.forEach((myClass) => {
+    if (myClass) {
+      myClass.teachers.pull(teacherId);
+      myClass.save();
+    }
+  });
+};
+
 module.exports = Teacher;

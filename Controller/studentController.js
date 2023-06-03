@@ -46,7 +46,7 @@ const deleteStudent = async (req, res) => {
       return res
         .status(204)
         .json({ message: `no matches student with ID: ${id}.` });
-    await student.deleteOne();
+    await Student.deleteStudentAndRemoveFromClass(id);
     res.json(student);
   } catch (err) {
     console.log(err);

@@ -26,7 +26,7 @@ const deleteOrganization = async (req, res) => {
       return res
         .status(204)
         .json({ message: `no matches organization with ID: ${id}.` });
-    await organ.deleteOne();
+    await Organization.deleteOrganAndRemoveFromOwner(id);
     res.json(organ);
   } catch (err) {
     console.log(err);

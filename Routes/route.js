@@ -1,5 +1,5 @@
 const express = require("express");
-const { createClass } = require("../Controller/classController");
+const { createClass, deleteClass } = require("../Controller/classController");
 const {
   createOrganization,
   deleteOrganization,
@@ -12,15 +12,25 @@ const {
 const {
   getStudent,
   createStudent,
+  deleteStudent,
 } = require("../Controller/studentController");
 const {
   getTeacher,
   createTeacher,
+  deleteTeacher,
 } = require("../Controller/teacherController");
+
 
 const router = express.Router();
 
 router
+
+  .route("/student")
+  .delete(deleteStudent);
+router
+  .route("/teacher")
+  .delete(deleteTeacher);
+
   .route("/createStudent")
   .post(createStudent);
 router
@@ -44,6 +54,6 @@ router
   .route("/organizations")
   .post(createOrganization)
   .delete(deleteOrganization);
-router.route("/classes").post(createClass);
+router.route("/classes").post(createClass).delete(deleteClass);
 
 module.exports = router;

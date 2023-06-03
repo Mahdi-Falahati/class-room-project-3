@@ -34,4 +34,23 @@ const createTeacher = async (req, res) => {
   }
 };
 
-module.exports = { getTeacher, createTeacher };
+// @desc - delete a teacher
+// @route - DELETE '/teacher'
+// @access - public
+const deleteTeacher = async (req, res) => {
+  const { id } = req?.body;
+  if (!id) return res.status(400).json({ message: "Teacher id is required" });
+  try {
+    const teacher = await Teacher.findOne({ _id: id });
+    if (!teacher)
+      return res
+        .status(204)
+        .json({ message: `no matches teacher with ID: ${id}.` });
+    Teacher.deleteTeacherAndRemoveFromClass(id);
+    res.json(teacher);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { getTeacher, createTeacher, deleteTeacher };

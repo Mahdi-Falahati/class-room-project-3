@@ -34,4 +34,23 @@ organizationSchema.pre("save", async function (next) {
 
 const Organization = mongoose.model("Organization", organizationSchema);
 
+Organization.deleteOrganAndRemoveFromOwner = async function (organizationId) {
+  const organ = await Organization.findOneAndDelete({ _id: organizationId });
+
+  if (!organ) {
+    throw new Error("Organization not found.");
+  }
+
+  const ownerId = organ.owner;
+
+  if (ownerId) {
+    const owner = await Owner.findById(ownerId);
+
+    if (owner) {
+      owner.organizations.pull(organizationId);
+      await owner.save();
+    }
+  }
+};
+
 module.exports = Organization;
