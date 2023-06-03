@@ -56,6 +56,7 @@ export default function Login() {
    
   };
   const changPage=(path,flag)=>{
+    console.log("check");
     auth.loggedIn(flag);
     navigate(path)
   }
