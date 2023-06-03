@@ -1,7 +1,8 @@
-import Student from "../Students";
 import AddPerson from "./AddPerson";
 import { Box, Grid, List } from "@mui/material";
-import DialogAddHomeWork from "./DialogAddHomeWork";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+// import PersonInfo from "./InfoContent";
+import InfoContent from "./InfoContent";
 
 export default function StudentList() {
   const deleteHandler = (id) => {
@@ -22,8 +23,12 @@ export default function StudentList() {
               flexWrap: "wrap",
             }}
           >
-            <AddPerson title="Add Student" Organization="APS" Class="APS3E" />
-            <DialogAddHomeWork Organization="APS" Class="APS3E" />
+            <AddPerson
+              title="Add Student"
+              Organization="APS"
+              Class="APS3E"
+              icon={<PersonAddIcon />}
+            />
           </Grid>
           <Grid
             item
@@ -37,7 +42,7 @@ export default function StudentList() {
             }}
           >
             {fakeData?.map((info, index) => (
-              <Student
+              <InfoContent
                 key={index}
                 OnDelete={deleteHandler}
                 Name={info.name}

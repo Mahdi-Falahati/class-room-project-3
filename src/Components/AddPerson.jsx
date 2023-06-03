@@ -4,13 +4,12 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import Typography from "@mui/material/Typography";
 
 import { useState } from "react";
 
-export default function AddPerson({ title, Organization, Class }) {
+export default function AddPerson({ title, Organization, Class, icon }) {
   const [open, setOpen] = useState(false);
   const [term, setTerm] = useState("");
 
@@ -31,11 +30,11 @@ export default function AddPerson({ title, Organization, Class }) {
   };
 
   return (
-    <div style={{margin:"10px"}}>
+    <div style={{ margin: "10px" }}>
       <Button
         variant="outlined"
         sx={{ width: "280px", borderRadius: "15px", letterSpacing: "2px" }}
-        endIcon={<PersonAddIcon />}
+        endIcon={icon}
         onClick={handleClickOpen}
       >
         {title}
