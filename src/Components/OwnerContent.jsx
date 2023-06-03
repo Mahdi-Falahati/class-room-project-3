@@ -1,14 +1,15 @@
 import PropTypes from "prop-types";
-import PersonInfo from "./PersonInfo";
-import List from "@mui/material/List";
+
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
 import { useState } from "react";
-import AddPerson from "./AddPerson";
-import { Grid } from "@mui/material";
+import TeachersList from "./TeacherList";
+import ClassesList from "./ClassesList";
+import StudentList from "./StudentList";
+import HomeworkList from "./HomeworkList";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,70 +44,79 @@ function a11yProps(index) {
   };
 }
 
-export default function OwnerContent() {
-  const [value, setValue] = useState(0);
+export default function OwnerContent({ isOrgan, isClass, user }) {
+  const [value1, setValue1] = useState(0);
+  const [value2, setValue2] = useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleChangeTabOrgan = (event, newValue) => {
+    console.log("newValue", newValue);
+    setValue1(newValue);
   };
-
-  const deleteHandler = (id) => {
-    console.log(fakeData.filter((person) => person.id !== id));
+  const handleChangeTabClasses = (event, newValue) => {
+    console.log("newValue", newValue);
+    setValue2(newValue);
   };
 
   const Content = () => {
-    if (value === 0) {
-      return (
-        <TabPanel value={value} index={0}>
-          <List>
-            <Grid container columns={12}>
-              <Grid item xs={12} sx={{ textAlign: "center" }}>
-                <AddPerson
-                  title="Add Teacher"
-                  Organization="APS"
-                  Class="APS3E"
-                />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "space-around",
-                  bgcolor: "background.paper",
-                }}
-              >
-                {fakeData?.map((info, index) => (
-                  <PersonInfo
-                    key={index}
-                    OnDelete={deleteHandler}
-                    Name={info.name}
-                    ID={info.id}
-                  />
-                ))}
-              </Grid>
-            </Grid>
-          </List>
-        </TabPanel>
-      );
-    } else {
-      return "hello";
+    if (user === "student" && isClass) {
+      return <HomeworkList user={user} />;
+    } else if (isOrgan && user === "Admin") {
+      if (value1 === 0) {
+        return (
+          <TabPanel value={value1} index={0}>
+            <TeachersList />
+          </TabPanel>
+        );
+      } else if (value1 === 1) {
+        return (
+          <TabPanel value={value1} index={1}>
+            <ClassesList />
+          </TabPanel>
+        );
+      }
+    }
+    if (isClass) {
+      console.log(isClass, isOrgan);
+      if (value2 === 0 && user !== "student") {
+        return (
+          <TabPanel value={value2} index={0}>
+            <StudentList />
+          </TabPanel>
+        );
+      } else if (value2 === 1) {
+        return (
+          <TabPanel value={value2} index={1}>
+            <HomeworkList user={user} />
+          </TabPanel>
+        );
+      }
     }
   };
 
   return (
     <Box sx={{ width: "100%", minHeight: "80vh" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          <Tab label="Teachers" {...a11yProps(0)} />
-          <Tab label="Students" {...a11yProps(1)} />
-        </Tabs>
+        {isOrgan && user === "Admin" ? (
+          <Tabs
+            value={value1}
+            onChange={handleChangeTabOrgan}
+            aria-label="basic tabs example"
+          >
+            <Tab label="Teachers" {...a11yProps(0)} />
+            <Tab label="Classes" {...a11yProps(1)} />
+          </Tabs>
+        ) : isClass && user !== "student" ? (
+          <Tabs
+            value={value2}
+            onChange={handleChangeTabClasses}
+            aria-label="basic tabs example"
+          >
+            <Tab label="Students" {...a11yProps(0)} />
+            <Tab label="Homework" {...a11yProps(1)} />
+          </Tabs>
+        ) : (
+          ""
+        )}
       </Box>
       {Content()}
     </Box>

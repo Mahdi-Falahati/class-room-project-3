@@ -4,16 +4,13 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/material";
-import DialogAsignHomeWork from "./Components/DialogAsignHomeWork";
+import DeleteBtn from "./DeleteBtn";
 
-export default function Student({ Name, AvatarSrc = "", ID, OnDelete }) {
+export default function InfoContent({ Name, AvatarSrc = "", ID, OnDelete }) {
   const deleteHandler = (e) => {
     OnDelete(e.target.id);
   };
-
   return (
     <Box sx={{ m: 2 }}>
       <ListItem
@@ -21,7 +18,7 @@ export default function Student({ Name, AvatarSrc = "", ID, OnDelete }) {
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
-          flexWrap: "wrap",
+          width: 360,
         }}
       >
         <ListItemAvatar>
@@ -47,31 +44,8 @@ export default function Student({ Name, AvatarSrc = "", ID, OnDelete }) {
             </>
           }
         />
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}
-        >
-          <Button
-            sx={{
-              display: "flex",
-              lineHeight: "30px",
-              borderBottom: "1px solid",
-              borderRadius: "0px",
-              mx: 3,
-            }}
-            size="small"
-            endIcon={<DeleteIcon />}
-            color="secondary"
-            onClick={deleteHandler}
-            id={ID}
-          >
-            Delete
-          </Button>
-          <DialogAsignHomeWork Organization="APS" Class="APS3e"/>
-        </Box>
+        {/* ------ delete btn */}
+        <DeleteBtn />
       </ListItem>
       <Divider variant="inset" component="li" />
     </Box>

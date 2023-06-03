@@ -5,12 +5,23 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/material";
+import DialogAsignHomeWork from "./DialogAsignHomeWork";
+import DeleteBtn from "./DeleteBtn";
+import CheckBtn from "./CheckBtn";
 
-export default function PersonContent({ Name, AvatarSrc = "", ID, OnDelete }) {
+export default function HomeworkInfo({
+  Name,
+  AvatarSrc = "",
+  ID,
+  OnDelete,
+  user,
+}) {
   const deleteHandler = (e) => {
     OnDelete(e.target.id);
+  };
+  const editHandler = (e) => {
+    console.log(e.target.id);
   };
   return (
     <Box sx={{ m: 2 }}>
@@ -45,21 +56,35 @@ export default function PersonContent({ Name, AvatarSrc = "", ID, OnDelete }) {
             </>
           }
         />
-        <Button
+
+        <Box
           sx={{
             display: "flex",
-            lineHeight: "30px",
-            borderBottom: "1px solid",
-            borderRadius: "0px",
+            flexWrap: "wrap",
+            justifyContent: "center",
           }}
-          size="small"
-          endIcon={<DeleteIcon />}
-          color="secondary"
-          onClick={deleteHandler}
-          id={ID}
         >
-          Delete
-        </Button>
+          {/* ---------------------------------------------------- if user is student or not student */}
+          {user !== "student" ? (
+            <>
+              {/* ---------- delete btn */}
+              <DeleteBtn ID={ID} />
+              {/* --------------- edit btn */}
+              <DialogAsignHomeWork
+                Organization="APS"
+                Class="APS3e"
+                titleHw={Name}
+              />
+            </>
+          ) : (
+            //------------------------------------------- else if
+            <>
+              {/* ------------ check btn */}
+              <CheckBtn />
+            </>
+            //--------------------------------------------- end if
+          )}
+        </Box>
       </ListItem>
       <Divider variant="inset" component="li" />
     </Box>

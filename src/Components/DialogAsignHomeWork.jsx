@@ -6,12 +6,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import AssistantIcon from "@mui/icons-material/Assistant";
+import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import { Autocomplete, Typography } from "@mui/material";
 
-export default function DialogAsignHomeWork({ Organization, Class }) {
+export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
   const [open, setOpen] = useState(false);
-  const [term, setTerm] = useState("");
+  const [term, setTerm] = useState(titleHw ? titleHw : "");
 
   const defaultPropsHomeWork = {
     options: Homework,
@@ -48,10 +49,10 @@ export default function DialogAsignHomeWork({ Organization, Class }) {
           borderBottom: "1px solid",
           borderRadius: "0px",
         }}
-        endIcon={<AssignmentTurnedInIcon />}
+        endIcon={titleHw ? <EditIcon /> : <AssignmentTurnedInIcon />}
         onClick={handleClickOpen}
       >
-        Grade
+        {titleHw ? "Edit" : "Grade"}
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
@@ -59,16 +60,33 @@ export default function DialogAsignHomeWork({ Organization, Class }) {
           <AssistantIcon sx={{ marginLeft: "5px" }} />
         </DialogTitle>
         <DialogContent>
-          <Autocomplete
-            onChange={homeworkValueHandler}
-            sx={{ m: 1, width: "280px" }}
-            {...defaultPropsHomeWork}
-            id="auto-highlight"
-            autoHighlight
-            renderInput={(params) => (
-              <TextField {...params} label="Home work" variant="standard" />
-            )}
-          />
+          {/* ---------------- if edit Homework , titleHw === "" */}
+          {!titleHw ? (
+            <Autocomplete
+              onChange={homeworkValueHandler}
+              sx={{ m: 1, width: "280px" }}
+              {...defaultPropsHomeWork}
+              id="auto-highlight"
+              autoHighlight
+              renderInput={(params) => (
+                <TextField {...params} label="Home work" variant="standard" />
+              )}
+            />
+          ) : (
+            // ---------------- if assign grade ,titleHw !==""
+            <TextField
+              autoFocus
+              onChange={handleTerm}
+              value={term}
+              margin="dense"
+              id="name"
+              label="title"
+              type="string"
+              fullWidth
+              variant="standard"
+            />
+          )}
+
           <TextField
             autoFocus
             onChange={handleTerm}
@@ -86,7 +104,9 @@ export default function DialogAsignHomeWork({ Organization, Class }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleAssignGradeToHomeWrok}>Assign</Button>
+          <Button onClick={handleAssignGradeToHomeWrok}>
+            {titleHw ? "edit" : "Assign"}
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

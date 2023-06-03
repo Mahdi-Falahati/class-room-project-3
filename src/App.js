@@ -1,23 +1,14 @@
-import { Routes, Route } from "react-router-dom";
 import Login from "./Components/Login";
 import Owner from "./Components/Owner";
-import Teacher from "./Components/Teacher";
-import PrivateRoutes from "./Utils/PrivateRoutes"
-import { useAuth } from "./Utils/Auth";
+import TeacherPage from "./Components/TeacherPage";
+import StudentPage from "./Components/StudentPage";
 
 function App() {
-  const auth = useAuth();
-  console.log(auth);
   return (
-    <Routes>
-      <Route path="/Owner" element={
-        <PrivateRoutes isLoggedIn={auth}>
-          <Owner />
-        </PrivateRoutes>
-      }></Route>
-
-      <Route element={<Login />} path="/" />
-    </Routes>
+    //  <Login/>
+    <Owner />
+    // <TeacherPage />
+    // <StudentPage />
   );
 }
 
