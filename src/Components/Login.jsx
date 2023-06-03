@@ -15,15 +15,15 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import PasswordIcon from "@mui/icons-material/Password";
 import { useState, useReducer } from "react";
-import { getAllOrgan } from "../API/API";
+import { getOrganOwner, getTeacher, getStudent } from "../API/API";
 import { useNavigate } from "react-router-dom";
 import {useAuth} from "../Utils/Auth"
-import PrivateRoutes from "../Utils/PrivateRoutes";
 
 
 export default function Login() {
-  const [user,setUser]=useState('');
+
   const auth=useAuth();
+
   const navigate=useNavigate();
   const [value, setValue] = useState(options[0]);
   const [inputValue, setInputValue] = useState("");
@@ -40,8 +40,8 @@ export default function Login() {
   const passwordHandler = (e) => {
     dispatchInputData({ type: ActionType.Password, value: e.target.value });
   };
-
-  const handleSubmit = (event) => {
+  
+  const handleSubmit =(event) => {
     event.preventDefault();
     if (inputValue.trim() && data.userName.trim() && data.password.trim()) {
       setError({ username: false, password: false, role: false});
@@ -52,30 +52,32 @@ export default function Login() {
     } else {
       setError({ username: false, password: false, role: true });
     }
-    // console.log(inputValue);
-    getData(data)
-    
+   getData(data)
+   
   };
-  const changePage=(path)=>{
-  console.log(user);
-   console.log(auth);
-   navigate("/Owner");
+  const changPage=(path,flag)=>{
+    console.log("check");
+    auth.loggedIn(flag);
+    navigate(path)
   }
   const getData=async(data)=>{
-    // console.log(data);
+    let flag=false;
     switch (inputValue) {
       case "Admin":
-           const result=await getAllOrgan("/organizationOwnerP",{username:data.userName,password:data.password});
-           if (result._id) {
-           setUser(true);
-           console.log(user);
-           changePage("Owner")
-           }if(!auth.loggedIn){
-            console.log("asd");
-            navigate("/")
-           }
+           const organOwner=await getOrganOwner("/getOrganizationOwner",{username:data.userName,password:data.password});
+           if (organOwner._id) flag=true;
+           changPage("/Owner",flag)
         break;
-    
+        case "Teacher":
+            const teacher=await getTeacher("/getTeacher",{username:data.userName,password:data.password});
+           if (teacher._id) flag=true;
+           changPage("/Teacher",flag)
+        break;
+        case"Student":
+           const student=await getStudent("/getStudent",{username:data.userName,password:data.password});
+           if (student._id) flag=true;
+           changPage("/Student",flag)
+        break;
       default:
         break;
     }

@@ -3,21 +3,32 @@ import Login from "./Components/Login";
 import Owner from "./Components/Owner";
 import Teacher from "./Components/Teacher";
 import PrivateRoutes from "./Utils/PrivateRoutes"
-import { useAuth } from "./Utils/Auth";
+import { Auth } from "./Utils/Auth";
 
 function App() {
-  const auth = useAuth();
-  console.log(auth);
   return (
-    <Routes>
-      <Route path="/Owner" element={
-        <PrivateRoutes isLoggedIn={auth}>
-          <Owner />
-        </PrivateRoutes>
-      }></Route>
+    <Auth>
+      <Routes>
+        <Route path="/Owner" element={
+          <PrivateRoutes  >
+            <Owner />
+          </PrivateRoutes>
+        }></Route>
+        <Route path="/Teacher" element={
+          <PrivateRoutes  >
+            <Teacher />
+          </PrivateRoutes>
+        }></Route>
 
-      <Route element={<Login />} path="/" />
-    </Routes>
+        {/* <Route path="/Student" element={
+          <PrivateRoutes  >
+            <Student />
+          </PrivateRoutes>
+        }></Route> */}
+
+        <Route element={<Login />} path="/" />
+      </Routes>
+    </Auth>
   );
 }
 
