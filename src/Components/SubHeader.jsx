@@ -47,4 +47,3 @@ export default function SubHeader({ user }) {
     ></List>
   );
 }
-const Organistion = ["APS", "Youtube", "Google"];
