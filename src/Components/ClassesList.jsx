@@ -1,7 +1,6 @@
-import AddPerson from "./AddPerson";
 import { Grid, List } from "@mui/material";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import PersonInfo from "./InfoContent";
+import DialogAddClass from "./DialogAddClass";
 
 export default function ClassesList() {
   const deleteHandler = (id) => {};
@@ -10,12 +9,7 @@ export default function ClassesList() {
     <List>
       <Grid container columns={12}>
         <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <AddPerson
-            title="Add Class"
-            Organization="APS"
-            Class="APS3E"
-            icon={<AddCircleIcon />}
-          />
+          <DialogAddClass />
         </Grid>
         <Grid
           item

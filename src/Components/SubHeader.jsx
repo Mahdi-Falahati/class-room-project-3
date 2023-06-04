@@ -46,3 +46,4 @@ export default function SubHeader({ user }) {
       subheader={subHeader()}
     ></List>
   );
+}
