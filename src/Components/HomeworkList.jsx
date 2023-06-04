@@ -1,7 +1,6 @@
-import AddPerson from "./AddPerson";
 import { Grid, List } from "@mui/material";
 import HomeworkInfo from "./HomeworkInfo";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import DialogAddHomework from "./DialogAddHomeWork";
 
 export default function HomeworkList({ user }) {
   const deleteHandler = (id) => {};
@@ -10,16 +9,7 @@ export default function HomeworkList({ user }) {
     <List>
       <Grid container columns={12}>
         <Grid item xs={12} sx={{ textAlign: "center" }}>
-          {user === "student" ? (
-            <span>HomeWork</span>
-          ) : (
-            <AddPerson
-              title="Add Homework"
-              Organization="APS"
-              Class="APS3E"
-              icon={<AddCircleIcon />}
-            />
-          )}
+          {user === "student" ? <span>HomeWork</span> : <DialogAddHomework />}
         </Grid>
         <Grid
           item
