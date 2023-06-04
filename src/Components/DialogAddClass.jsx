@@ -6,10 +6,17 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import Typography from "@mui/material/Typography";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import { useState } from "react";
 
-export default function AddPerson({ title, Organization, Class, icon }) {
+export default function DialogAddClass({
+  title,
+  Organization,
+  Class,
+  icon,
+  user,
+}) {
   const [open, setOpen] = useState(false);
   const [term, setTerm] = useState("");
 
@@ -34,10 +41,10 @@ export default function AddPerson({ title, Organization, Class, icon }) {
       <Button
         variant="outlined"
         sx={{ width: "280px", borderRadius: "15px", letterSpacing: "2px" }}
-        endIcon={icon}
+        endIcon={<AddCircleIcon />}
         onClick={handleClickOpen}
       >
-        {title}
+        Add Class
       </Button>
 
       <Dialog open={open} onClose={handleClose}>
@@ -46,55 +53,18 @@ export default function AddPerson({ title, Organization, Class, icon }) {
         </DialogTitle>
 
         <DialogContent sx={{ width: "300px" }}>
-          {/* -------------------------------------------- username */}
-
           <TextField
             autoFocus
             onChange={handleTerm}
             value={term}
             margin="dense"
-            id="username"
-            label="Username"
+            id="titleClass"
+            label="Title"
             type="text"
             fullWidth
             variant="standard"
           />
-          {/* -------------------------------------------- password */}
-          <TextField
-            // onChange={passwordHandler}
-            required
-            fullWidth
-            // error={error.password}
-            // value={data.password}
-            id="Password"
-            label="Password"
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">
-            //       <PasswordIcon />
-            //     </InputAdornment>
-            //   ),
-            // }}
-            variant="standard"
-          />
-          {/*-------------------------------------------- confirm pasword */}
-          <TextField
-            // onChange={confirmPasswordHandler}
-            required
-            fullWidth
-            // error={error.password}
-            // value={data.password}
-            id="Password"
-            label="ConfirmPassword"
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">
-            //       <PasswordIcon />
-            //     </InputAdornment>
-            //   ),
-            // }}
-            variant="standard"
-          />
+
           <Typography variant="overline" display="block" gutterBottom>
             {Organization} - {Class}
           </Typography>

@@ -16,7 +16,7 @@ export default function HomeworkInfo({
   OnDelete,
   user,
 }) {
-
+  
   return (
     <Box sx={{ m: 2 }}>
       <ListItem
