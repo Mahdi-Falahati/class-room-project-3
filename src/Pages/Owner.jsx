@@ -2,9 +2,9 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import OwnerContent from "./OwnerContent";
-import SubHeader from "./SubHeader";
-import SelectOptions from "./SelectOptions";
+import OwnerContent from "../Components/OwnerContent";
+import SubHeader from "../Components/SubHeader";
+import SelectOptions from "../Components/SelectOptions";
 import { useState } from "react";
 
 export default function Owner() {

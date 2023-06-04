@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import SubHeader from "./SubHeader";
-import SelectOptions from "./SelectOptions";
+import SubHeader from "../Components/SubHeader";
+import SelectOptions from "../Components/SelectOptions";
 import { useState } from "react";
 
 export default function StudentPage() {
