@@ -122,11 +122,3 @@ export default function OwnerContent({ isOrgan, isClass, user }) {
     </Box>
   );
 }
-
-const fakeData = [
-  { name: "RC", id: "1" },
-  { name: "Mahdi", id: "2" },
-  { name: "Fateme", id: "3" },
-  { name: "Zahra", id: "4" },
-  { name: "Vesal", id: "5" },
-];
