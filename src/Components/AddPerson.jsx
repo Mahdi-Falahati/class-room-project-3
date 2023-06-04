@@ -7,11 +7,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import Typography from "@mui/material/Typography";
 
-import { useState } from "react";
+import { useReducer, useState } from "react";
 
 export default function AddPerson({ title, Organization, Class, icon }) {
   const [open, setOpen] = useState(false);
-  const [term, setTerm] = useState("");
+  const [data, dispatchInputData] = useReducer(formReducer, initialValue);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -21,8 +21,23 @@ export default function AddPerson({ title, Organization, Class, icon }) {
     setOpen(false);
   };
 
-  const handleTerm = (e) => {
-    setTerm(e.target.value);
+  const handleUserName = (e) => {
+    dispatchInputData({
+      type: ActionType.UserName,
+      value: e.target.value,
+    });
+  };
+  const passwordHandler = (e) => {
+    dispatchInputData({
+      type: ActionType.Password,
+      value: e.target.value,
+    });
+  };
+  const confirmPasswordHandler = (e) => {
+    dispatchInputData({
+      type: ActionType.ConfrimPassword,
+      value: e.target.value,
+    });
   };
 
   const handleAddPerson = () => {
@@ -50,8 +65,8 @@ export default function AddPerson({ title, Organization, Class, icon }) {
 
           <TextField
             autoFocus
-            onChange={handleTerm}
-            value={term}
+            onChange={handleUserName}
+            value={data.userName}
             margin="dense"
             id="username"
             label="Username"
@@ -61,9 +76,10 @@ export default function AddPerson({ title, Organization, Class, icon }) {
           />
           {/* -------------------------------------------- password */}
           <TextField
-            // onChange={passwordHandler}
+            onChange={passwordHandler}
             required
             fullWidth
+            value={data.password}
             // error={error.password}
             // value={data.password}
             id="Password"
@@ -79,9 +95,10 @@ export default function AddPerson({ title, Organization, Class, icon }) {
           />
           {/*-------------------------------------------- confirm pasword */}
           <TextField
-            // onChange={confirmPasswordHandler}
+            onChange={confirmPasswordHandler}
             required
             fullWidth
+            value={data.confrimPassword}
             // error={error.password}
             // value={data.password}
             id="Password"
@@ -107,3 +124,28 @@ export default function AddPerson({ title, Organization, Class, icon }) {
     </div>
   );
 }
+
+const ActionType = {
+  UserName: "__UserName",
+  Password: "__Password",
+  ConfrimPassword: "ConfrimPassword",
+};
+
+const formReducer = (state, action) => {
+  switch (action.type) {
+    case ActionType.UserName:
+      return { ...state, userName: action.value };
+    case ActionType.Password:
+      return { ...state, password: action.value };
+    case ActionType.ConfrimPassword:
+      return { ...state, confrimPassword: action.value };
+    default:
+      break;
+  }
+};
+
+const initialValue = {
+  userName: "",
+  password: "",
+  confrimPassword: "",
+};
