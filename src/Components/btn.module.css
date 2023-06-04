@@ -1,0 +1,28 @@
+.btnDelete {
+  position: relative;
+  height: 35px;
+  border-radius: 20px;
+  transition: transform 1s;
+}
+
+.btnDelete::after {
+  content: "";
+  transition: all 1s;
+  position: absolute;
+  top: 0%;
+  left: 20%;
+  right: 0%;
+  bottom: 0%;
+  border: 1px solid red;
+  background-color: rgba(0, 0, 0, 0.096);
+  border-radius: 20px;
+  width: 35px !important;
+  transform: scale(0, 0);
+}
+
+.btnDelete:hover::after {
+  transform: scale(1, 1);
+}
+.btnDelete:hover {
+  color: red;
+}

@@ -2,25 +2,20 @@ import React from "react";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+import style from "./btn.module.css";
+
 export default function DeleteBtn({ ID }) {
   const deleteHandler = (e) => {};
   return (
     <>
       <Button
-        sx={{
-          display: "flex",
-          lineHeight: "30px",
-          borderBottom: "1px solid",
-          borderRadius: "0px",
-          marginRight: "3px",
-        }}
+        className={style.btnDelete}
         size="small"
-        endIcon={<DeleteIcon />}
         color="secondary"
         onClick={deleteHandler}
         id={ID}
       >
-        Delete
+        <DeleteIcon />
       </Button>
     </>
   );
