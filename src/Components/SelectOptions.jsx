@@ -48,12 +48,13 @@ export default function SelectOptions({ user }) {
           sx={{
             display: "flex",
             justifyContent: "space-around",
+            flexWrap: "wrap",
             mb: 4,
           }}
         >
           <Autocomplete
             onChange={organistionValueHandler}
-            sx={{ m: 1, width: "280px" }}
+            sx={{ mb: 1, width: "280px" }}
             {...defaultPropsOrganistion}
             id="auto-highlight"
             autoHighlight
@@ -64,7 +65,7 @@ export default function SelectOptions({ user }) {
 
           <Autocomplete
             onChange={ClassesValueHandler}
-            sx={{ m: 1, width: "280px" }}
+            sx={{ m: 2, width: "280px" }}
             {...defaultPropsClasses}
             id="auto-highlight"
             autoHighlight
