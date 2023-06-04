@@ -16,6 +16,8 @@ export default function SubHeader({ user }) {
             alignItems: "center",
             flexDirection: "column",
             paddingRight: "0.5rem",
+            ml: 3,
+            mb: 3,
           }}
         >
           <ListSubheader
@@ -25,13 +27,21 @@ export default function SubHeader({ user }) {
               display: "flex",
               textAlign: "center",
               justifyContent: "center",
+              alignItems: "center",
               borderRadius: "5px",
+              letterSpacing: "2px",
+              fontStyle: "italic",
+              fontWeight: "bold",
             }}
           >
             <ListItemAvatar>
-              <Avatar alt={"Name"} src={"AvatarSrc"} />
+              <Avatar
+                sx={{ background: "purple" }}
+                alt={"Name"}
+                src={"AvatarSrc"}
+              />
             </ListItemAvatar>
-            {user} :Nested List Items
+            {user} : Nested List Items
           </ListSubheader>
         </Grid>
       </Grid>
