@@ -14,10 +14,15 @@ import LoginIcon from "@mui/icons-material/Login";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import PasswordIcon from "@mui/icons-material/Password";
-
 import { useState, useReducer } from "react";
+import { getOrganOwner, getTeacher, getStudent } from "../API/API";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Utils/Auth";
 
 export default function Login() {
+  const auth = useAuth();
+
+  const navigate = useNavigate();
   const [value, setValue] = useState(options[0]);
   const [inputValue, setInputValue] = useState("");
   const [data, dispatchInputData] = useReducer(formReducer, initialValue);
@@ -37,13 +42,50 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (inputValue.trim() && data.userName.trim() && data.password.trim()) {
-      setError({ username: false, password: false, role: false});
+      setError({ username: false, password: false, role: false });
     } else if (!data.userName.trim()) {
       setError({ ...error, username: true });
     } else if (!data.password.trim()) {
       setError({ ...error, username: false, password: true });
     } else {
       setError({ username: false, password: false, role: true });
+    }
+    getData(data);
+  };
+  const changPage = (path, flag) => {
+    console.log("check");
+    auth.loggedIn(flag);
+    navigate(path);
+  };
+  const getData = async (data) => {
+    let flag = false;
+    switch (inputValue) {
+      case "Admin":
+        const organOwner = await getOrganOwner("/getOrganizationOwner", {
+          username: data.userName,
+          password: data.password,
+        });
+        if (organOwner._id) flag = true;
+        changPage("/Owner", flag);
+        break;
+      case "Teacher":
+        const teacher = await getTeacher("/getTeacher", {
+          username: data.userName,
+          password: data.password,
+        });
+        if (teacher._id) flag = true;
+        changPage("/Teacher", flag);
+        break;
+      case "Student":
+        const student = await getStudent("/getStudent", {
+          username: data.userName,
+          password: data.password,
+        });
+        if (student._id) flag = true;
+        changPage("/Student", flag);
+        break;
+      default:
+        break;
     }
   };
 
@@ -142,6 +184,15 @@ export default function Login() {
             >
               Sign In
             </Button>
+            <Grid textAlign="center">
+              <Link
+                color="secondary"
+                href="http://localhost:3000/"
+                underline="none"
+              >
+                Sign Up
+              </Link>
+            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />

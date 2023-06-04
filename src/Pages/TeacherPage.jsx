@@ -1,12 +1,9 @@
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import SubHeader from "./SubHeader";
-import SelectOptions from "./SelectOptions";
-import { useState } from "react";
+import SubHeader from "../Components/SubHeader";
+import SelectOptions from "../Components/SelectOptions";
 
-export default function StudentPage() {
-  const [isOrgan, setIsOrgan] = useState(false);
-  const [isClass, setIsClass] = useState(false);
+export default function Teacher() {
   const defaultPropsOrganistion = {
     options: Organistion,
     getOptionLabel: (option) => option,
@@ -19,29 +16,16 @@ export default function StudentPage() {
 
   const organistionValueHandler = (e) => {
     console.log(e.target.innerText);
-    if (e.target.innerText) {
-      setIsOrgan(true);
-      setIsClass(false);
-    } else {
-      setIsOrgan(false);
-    }
   };
 
   const ClassesValueHandler = (e) => {
     console.log(e.target.innerText);
-    if (e.target.innerText) {
-      setIsClass(true);
-      setIsOrgan(false);
-    } else {
-      setIsOrgan(true);
-      setIsClass(false);
-    }
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <SubHeader user="student" />
-      <SelectOptions user={"student"} />
+      <SubHeader user="teacher" />
+      <SelectOptions user="teacher" />
     </Box>
   );
 }

@@ -1,13 +1,10 @@
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
-import OwnerContent from "./OwnerContent";
-import SubHeader from "./SubHeader";
-import SelectOptions from "./SelectOptions";
+import SubHeader from "../Components/SubHeader";
+import SelectOptions from "../Components/SelectOptions";
 import { useState } from "react";
 
-export default function Owner() {
+export default function StudentPage() {
   const [isOrgan, setIsOrgan] = useState(false);
   const [isClass, setIsClass] = useState(false);
   const defaultPropsOrganistion = {
@@ -43,8 +40,8 @@ export default function Owner() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <SubHeader user="Admin" />
-      <SelectOptions user={"Admin"} />
+      <SubHeader user="student" />
+      <SelectOptions user={"student"} />
     </Box>
   );
 }
