@@ -10,6 +10,3 @@ export default function Teacher() {
     </Box>
   );
 }
-
-const Organistion = ["APS", "Youtube", "Google"];
-const Classes = ["APS-3a", "APS-3b", "APS-3c", "APS-3e"];
