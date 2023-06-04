@@ -13,7 +13,8 @@ import style from "./btn.module.css";
 
 export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
   const [open, setOpen] = useState(false);
-  const [term, setTerm] = useState(titleHw ? titleHw : "");
+  const [title, setTitle] = useState("");
+  const [grade, setGrade] = useState(0);
 
   const defaultPropsHomeWork = {
     options: Homework,
@@ -28,8 +29,11 @@ export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
     setOpen(false);
   };
 
-  const handleTerm = (e) => {
-    setTerm(e.target.value);
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleGrade = (e) => {
+    setGrade(e.target.value);
   };
 
   const homeworkValueHandler = (e) => {
@@ -47,7 +51,7 @@ export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
         className={style.editBtn}
         onClick={handleClickOpen}
       >
-        {titleHw ? <EditIcon /> : <AssignmentTurnedInIcon />}
+        {title ? <EditIcon /> : <AssignmentTurnedInIcon />}
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
@@ -56,8 +60,9 @@ export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
         </DialogTitle>
         <DialogContent>
           {/* ---------------- if edit Homework , titleHw === "" */}
-          {!titleHw ? (
+          {!title ? (
             <Autocomplete
+              autoFocus
               onChange={homeworkValueHandler}
               sx={{ m: 1, width: "280px" }}
               {...defaultPropsHomeWork}
@@ -70,9 +75,8 @@ export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
           ) : (
             // ---------------- if assign grade ,titleHw !==""
             <TextField
-              autoFocus
-              onChange={handleTerm}
-              value={term}
+              onChange={handleTitle}
+              value={title}
               margin="dense"
               id="name"
               label="title"
@@ -84,8 +88,8 @@ export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
 
           <TextField
             autoFocus
-            onChange={handleTerm}
-            value={term}
+            onChange={handleGrade}
+            value={grade}
             margin="dense"
             id="name"
             label="Grade"
