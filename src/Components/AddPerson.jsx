@@ -46,15 +46,53 @@ export default function AddPerson({ title, Organization, Class, icon }) {
         </DialogTitle>
 
         <DialogContent sx={{ width: "300px" }}>
+          {/* -------------------------------------------- username */}
+
           <TextField
             autoFocus
             onChange={handleTerm}
             value={term}
             margin="dense"
-            id="name"
-            label="Name"
+            id="username"
+            label="Username"
             type="text"
             fullWidth
+            variant="standard"
+          />
+          {/* -------------------------------------------- password */}
+          <TextField
+            // onChange={passwordHandler}
+            required
+            fullWidth
+            // error={error.password}
+            // value={data.password}
+            id="Password"
+            label="Password"
+            // InputProps={{
+            //   startAdornment: (
+            //     <InputAdornment position="start">
+            //       <PasswordIcon />
+            //     </InputAdornment>
+            //   ),
+            // }}
+            variant="standard"
+          />
+          {/*-------------------------------------------- confirm pasword */}
+          <TextField
+            // onChange={confirmPasswordHandler}
+            required
+            fullWidth
+            // error={error.password}
+            // value={data.password}
+            id="Password"
+            label="ConfirmPassword"
+            // InputProps={{
+            //   startAdornment: (
+            //     <InputAdornment position="start">
+            //       <PasswordIcon />
+            //     </InputAdornment>
+            //   ),
+            // }}
             variant="standard"
           />
           <Typography variant="overline" display="block" gutterBottom>
