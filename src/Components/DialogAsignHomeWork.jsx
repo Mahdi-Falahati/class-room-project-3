@@ -9,6 +9,7 @@ import AssistantIcon from "@mui/icons-material/Assistant";
 import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import { Autocomplete, Typography } from "@mui/material";
+import style from "./btn.module.css";
 
 export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
   const [open, setOpen] = useState(false);
@@ -43,16 +44,10 @@ export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
     <div>
       <Button
         color="secondary"
-        sx={{
-          display: "flex",
-          lineHeight: "30px",
-          borderBottom: "1px solid",
-          borderRadius: "0px",
-        }}
-        endIcon={titleHw ? <EditIcon /> : <AssignmentTurnedInIcon />}
+        className={style.editBtn}
         onClick={handleClickOpen}
       >
-        {titleHw ? "Edit" : "Grade"}
+        {titleHw ? <EditIcon /> : <AssignmentTurnedInIcon />}
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>

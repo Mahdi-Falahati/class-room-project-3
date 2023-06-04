@@ -26,3 +26,29 @@
 .btnDelete:hover {
   color: red;
 }
+
+/* edit btn */
+.editBtn {
+  position: relative;
+  height: 35px;
+  border-radius: 20px;
+  transition: transform 1s;
+  box-shadow: inset -1px -1px 2px 0px purple;
+}
+
+.editBtn::after {
+  content: "";
+  transition: all 1s;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+  background-color: rgba(92, 92, 92, 0.178);
+  border-radius: 20px;
+  transform: scale(0, 1);
+}
+
+.editBtn:hover::after {
+  transform: scale(1, 1);
+}
