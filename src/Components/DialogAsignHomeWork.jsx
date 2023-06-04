@@ -18,9 +18,10 @@ export default function DialogAsignHomeWork({
   titleHw,
 }) {
   const [open, setOpen] = useState(false);
-  const [grade, setGrade] = useState("");
+  const [grade, setGrade] = useState(-1);
+  const [homeWork, setHomeWork] = useState("");
   const [error, setError] = useState({
-    title: false,
+    homewrok: false,
     grade: false,
   });
 
@@ -42,11 +43,19 @@ export default function DialogAsignHomeWork({
   };
 
   const homeworkValueHandler = (e) => {
-    console.log(e.target.innerText);
+    setHomeWork(e.target.innerText);
   };
 
   const handleAssignGradeToHomeWrok = () => {
-  
+    console.log(homeWork.trim().length > 2);
+    if (homeWork.trim() && Number(grade) >= 0) {
+      setOpen(false);
+      setError({ grade: false, homewrok: false });
+    } else if (!homeWork.trim()) {
+      setError({ ...error, homewrok: true });
+    } else if (Number(grade) <= 0) {
+      setError({ grade: true, homewrok: false });
+    }
   };
 
   return (
@@ -74,7 +83,13 @@ export default function DialogAsignHomeWork({
               id="auto-highlight"
               autoHighlight
               renderInput={(params) => (
-                <TextField {...params} label="Home work" variant="standard" />
+                <TextField
+                  value={homeWork}
+                  error={error.homewrok}
+                  {...params}
+                  label="Home work"
+                  variant="standard"
+                />
               )}
             />
           ) : (
