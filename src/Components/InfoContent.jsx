@@ -7,10 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import DeleteBtn from "./DeleteBtn";
 
-export default function InfoContent({ Name, AvatarSrc = "", ID, OnDelete }) {
-  const deleteHandler = (e) => {
-    OnDelete(e.target.id);
-  };
+export default function InfoContent({ Name, AvatarSrc = "",}) {
   return (
     <Box sx={{ m: 2 }}>
       <ListItem

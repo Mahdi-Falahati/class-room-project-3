@@ -1,4 +1,3 @@
-import * as React from "react";
 import Grid from "@mui/material/Grid";
 import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
@@ -6,11 +5,6 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 
 export default function SubHeader({ user }) {
-  const defaultPropsOrganistion = {
-    options: Organistion,
-    getOptionLabel: (option) => option,
-  };
-
   const subHeader = () => {
     return (
       <Grid container columns={12}>
@@ -52,5 +46,3 @@ export default function SubHeader({ user }) {
       subheader={subHeader()}
     ></List>
   );
-}
-const Organistion = ["APS", "Youtube", "Google"];
