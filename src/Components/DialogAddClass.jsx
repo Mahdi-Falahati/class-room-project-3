@@ -6,6 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import Typography from "@mui/material/Typography";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import { useState } from "react";
 
@@ -40,10 +41,10 @@ export default function DialogAddClass({
       <Button
         variant="outlined"
         sx={{ width: "280px", borderRadius: "15px", letterSpacing: "2px" }}
-        endIcon={icon}
+        endIcon={<AddCircleIcon />}
         onClick={handleClickOpen}
       >
-        {title}
+        Add Class
       </Button>
 
       <Dialog open={open} onClose={handleClose}>
