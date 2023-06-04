@@ -57,6 +57,7 @@ export default function SelectOptions({ user }) {
           sx={{
             display: "flex",
             justifyContent: "space-around",
+            alignItems: "center",
             flexWrap: "wrap",
             mb: 4,
           }}
