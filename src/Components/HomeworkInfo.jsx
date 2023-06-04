@@ -68,6 +68,7 @@ export default function HomeworkInfo({
                 Organization="APS"
                 Class="APS3e"
                 titleHw={Name}
+                user={user}
               />
             </>
           ) : (

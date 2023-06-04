@@ -8,6 +8,11 @@ import { useState } from "react";
 export default function SelectOptions({ user }) {
   const [isOrgan, setIsOrgan] = useState(false);
   const [isClass, setIsClass] = useState(false);
+  const [error, setError] = useState({
+    organistion: true,
+    classes: true,
+  });
+
   const defaultPropsOrganistion = {
     options: Organistion,
     getOptionLabel: (option) => option,
@@ -23,7 +28,9 @@ export default function SelectOptions({ user }) {
     if (e.target.innerText) {
       setIsOrgan(true);
       setIsClass(false);
+      setError({ ...error, organistion: false });
     } else {
+      setError({ ...error, organistion: true });
       setIsOrgan(false);
     }
   };
@@ -33,9 +40,11 @@ export default function SelectOptions({ user }) {
     if (e.target.innerText) {
       setIsClass(true);
       setIsOrgan(false);
+      setError({ ...error, classes: false });
     } else {
       setIsOrgan(true);
       setIsClass(false);
+      setError({ ...error, classes: true });
     }
   };
 
@@ -48,6 +57,7 @@ export default function SelectOptions({ user }) {
           sx={{
             display: "flex",
             justifyContent: "space-around",
+            alignItems: "center",
             flexWrap: "wrap",
             mb: 4,
           }}
@@ -59,7 +69,12 @@ export default function SelectOptions({ user }) {
             id="auto-highlight"
             autoHighlight
             renderInput={(params) => (
-              <TextField {...params} label="Organization" variant="standard" />
+              <TextField
+                error={error.organistion}
+                {...params}
+                label="Organization"
+                variant="standard"
+              />
             )}
           />
 
@@ -70,7 +85,12 @@ export default function SelectOptions({ user }) {
             id="auto-highlight"
             autoHighlight
             renderInput={(params) => (
-              <TextField {...params} label="Classes" variant="standard" />
+              <TextField
+                error={error.classes}
+                {...params}
+                label="Classes"
+                variant="standard"
+              />
             )}
           />
           {/* } */}

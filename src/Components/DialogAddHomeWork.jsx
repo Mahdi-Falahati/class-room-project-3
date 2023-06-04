@@ -14,6 +14,10 @@ export default function DialogAddHomeWork({ Organization, Class }) {
   const [open, setOpen] = useState(false);
   const [term, setTerm] = useState("");
   const [description, setDescription] = useState("");
+  const [error, setError] = useState({
+    title: false,
+    description: false,
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,7 +36,14 @@ export default function DialogAddHomeWork({ Organization, Class }) {
   };
 
   const handleAddHomeWork = () => {
-    setOpen(false);
+    if (term.trim() && description.trim()) {
+      setError({ term: false, description: false });
+      setOpen(false);
+    } else if (!term.trim()) {
+      setError({ ...error, term: true });
+    } else if (!description.trim()) {
+      setError({ ...error, description: true });
+    }
   };
 
   return (
@@ -56,6 +67,7 @@ export default function DialogAddHomeWork({ Organization, Class }) {
             autoFocus
             onChange={handleTerm}
             value={term}
+            error={error.term}
             margin="dense"
             id="title"
             label="Title"
@@ -64,8 +76,8 @@ export default function DialogAddHomeWork({ Organization, Class }) {
             variant="standard"
           />
           <TextField
-            autoFocus
             onChange={handleDescription}
+            error={error.description}
             value={description}
             margin="dense"
             id="Description"

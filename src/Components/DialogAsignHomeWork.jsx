@@ -11,9 +11,19 @@ import { useState } from "react";
 import { Autocomplete, Typography } from "@mui/material";
 import style from "./btn.module.css";
 
-export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
+export default function DialogAsignHomeWork({
+  user,
+  Organization,
+  Class,
+  titleHw,
+}) {
   const [open, setOpen] = useState(false);
-  const [term, setTerm] = useState(titleHw ? titleHw : "");
+  const [grade, setGrade] = useState(-1);
+  const [homeWork, setHomeWork] = useState("");
+  const [error, setError] = useState({
+    homewrok: false,
+    grade: false,
+  });
 
   const defaultPropsHomeWork = {
     options: Homework,
@@ -28,16 +38,24 @@ export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
     setOpen(false);
   };
 
-  const handleTerm = (e) => {
-    setTerm(e.target.value);
+  const handleGrade = (e) => {
+    setGrade(e.target.value);
   };
 
   const homeworkValueHandler = (e) => {
-    console.log(e.target.innerText);
+    setHomeWork(e.target.innerText);
   };
 
   const handleAssignGradeToHomeWrok = () => {
-    setOpen(false);
+    console.log(homeWork.trim().length > 2);
+    if (homeWork.trim() && Number(grade) >= 0) {
+      setOpen(false);
+      setError({ grade: false, homewrok: false });
+    } else if (!homeWork.trim()) {
+      setError({ ...error, homewrok: true });
+    } else if (Number(grade) <= 0) {
+      setError({ grade: true, homewrok: false });
+    }
   };
 
   return (
@@ -47,7 +65,7 @@ export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
         className={style.editBtn}
         onClick={handleClickOpen}
       >
-        {titleHw ? <EditIcon /> : <AssignmentTurnedInIcon />}
+        {user === "Admin" ? <EditIcon /> : <AssignmentTurnedInIcon />}
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
@@ -56,23 +74,29 @@ export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
         </DialogTitle>
         <DialogContent>
           {/* ---------------- if edit Homework , titleHw === "" */}
-          {!titleHw ? (
+          {user !== "Admin" ? (
             <Autocomplete
+              autoFocus
               onChange={homeworkValueHandler}
               sx={{ m: 1, width: "280px" }}
               {...defaultPropsHomeWork}
               id="auto-highlight"
               autoHighlight
               renderInput={(params) => (
-                <TextField {...params} label="Home work" variant="standard" />
+                <TextField
+                  value={homeWork}
+                  error={error.homewrok}
+                  {...params}
+                  label="Home work"
+                  variant="standard"
+                />
               )}
             />
           ) : (
             // ---------------- if assign grade ,titleHw !==""
             <TextField
-              autoFocus
-              onChange={handleTerm}
-              value={term}
+              error={error.title}
+              value={titleHw}
               margin="dense"
               id="name"
               label="title"
@@ -83,9 +107,9 @@ export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
           )}
 
           <TextField
-            autoFocus
-            onChange={handleTerm}
-            value={term}
+            error={error.grade}
+            onChange={handleGrade}
+            value={grade}
             margin="dense"
             id="name"
             label="Grade"
@@ -100,7 +124,7 @@ export default function DialogAsignHomeWork({ Organization, Class, titleHw }) {
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleAssignGradeToHomeWrok}>
-            {titleHw ? "edit" : "Assign"}
+            {user === "Admin" ? "edit" : "Assign"}
           </Button>
         </DialogActions>
       </Dialog>
