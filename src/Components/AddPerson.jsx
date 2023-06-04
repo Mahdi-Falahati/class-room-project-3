@@ -12,6 +12,11 @@ import { useReducer, useState } from "react";
 export default function AddPerson({ title, Organization, Class, icon }) {
   const [open, setOpen] = useState(false);
   const [data, dispatchInputData] = useReducer(formReducer, initialValue);
+  const [error, setError] = useState({
+    username: false,
+    password: false,
+    confrimPassword: false,
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -41,7 +46,20 @@ export default function AddPerson({ title, Organization, Class, icon }) {
   };
 
   const handleAddPerson = () => {
-    setOpen(false);
+    if (
+      data.confrimPassword.trim() &&
+      data.userName.trim() &&
+      data.password.trim()
+    ) {
+      setError({ username: false, password: false, confrimPassword: false });
+      setOpen(false);
+    } else if (!data.userName.trim()) {
+      setError({ ...error, username: true });
+    } else if (!data.password.trim()) {
+      setError({ ...error, username: false, password: true });
+    } else {
+      setError({ username: false, password: false, confrimPassword: true });
+    }
   };
 
   return (
@@ -65,6 +83,7 @@ export default function AddPerson({ title, Organization, Class, icon }) {
 
           <TextField
             autoFocus
+            error={error.username}
             onChange={handleUserName}
             value={data.userName}
             margin="dense"
@@ -77,11 +96,10 @@ export default function AddPerson({ title, Organization, Class, icon }) {
           {/* -------------------------------------------- password */}
           <TextField
             onChange={passwordHandler}
+            error={error.password}
             required
             fullWidth
             value={data.password}
-            // error={error.password}
-            // value={data.password}
             id="Password"
             label="Password"
             // InputProps={{
@@ -96,11 +114,10 @@ export default function AddPerson({ title, Organization, Class, icon }) {
           {/*-------------------------------------------- confirm pasword */}
           <TextField
             onChange={confirmPasswordHandler}
+            error={error.confrimPassword}
             required
             fullWidth
             value={data.confrimPassword}
-            // error={error.password}
-            // value={data.password}
             id="Password"
             label="ConfirmPassword"
             // InputProps={{
