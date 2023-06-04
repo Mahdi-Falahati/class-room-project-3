@@ -4,7 +4,6 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import DialogAsignHomeWork from "./DialogAsignHomeWork";
 import DeleteBtn from "./DeleteBtn";
@@ -17,12 +16,7 @@ export default function HomeworkInfo({
   OnDelete,
   user,
 }) {
-  const deleteHandler = (e) => {
-    OnDelete(e.target.id);
-  };
-  const editHandler = (e) => {
-    console.log(e.target.id);
-  };
+
   return (
     <Box sx={{ m: 2 }}>
       <ListItem
