@@ -11,6 +11,7 @@ import { useReducer, useState } from "react";
 
 export default function DialogAddPerson({ title, Organization, Class, icon }) {
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
   const [data, dispatchInputData] = useReducer(formReducer, initialValue);
   const [error, setError] = useState({
     username: false,
@@ -24,6 +25,14 @@ export default function DialogAddPerson({ title, Organization, Class, icon }) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleClickOpen2 = () => {
+    setOpen2(true);
+  };
+
+  const handleClose2 = () => {
+    setOpen2(false);
   };
 
   const handleUserName = (e) => {
