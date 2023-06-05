@@ -24,25 +24,27 @@ export default function SelectOptions({ user }) {
   };
 
   const organistionValueHandler = (e) => {
-    console.log(e.target.innerText);
     if (e.target.innerText) {
       setIsOrgan(true);
-      setIsClass(false);
       setError({ ...error, organistion: false });
     } else {
       setError({ ...error, organistion: true });
       setIsOrgan(false);
+      setIsClass(false);
     }
   };
 
   const ClassesValueHandler = (e) => {
-    console.log(e.target.innerText);
     if (e.target.innerText) {
       setIsClass(true);
       setIsOrgan(false);
       setError({ ...error, classes: false });
-    } else {
+    } else if (!e.target.innerText && !isOrgan && isClass) {
       setIsOrgan(true);
+      setIsClass(false);
+      setError({ ...error, classes: true });
+    } else if (!e.target.innerText && !isOrgan && !isClass) {
+      setIsOrgan(false);
       setIsClass(false);
       setError({ ...error, classes: true });
     }
