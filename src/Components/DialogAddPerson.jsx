@@ -102,13 +102,6 @@ export default function DialogAddPerson({ title, Organization, Class, icon }) {
             value={data.password}
             id="Password"
             label="Password"
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">
-            //       <PasswordIcon />
-            //     </InputAdornment>
-            //   ),
-            // }}
             variant="standard"
           />
           {/*-------------------------------------------- confirm pasword */}
@@ -120,13 +113,6 @@ export default function DialogAddPerson({ title, Organization, Class, icon }) {
             value={data.confrimPassword}
             id="Password"
             label="ConfirmPassword"
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">
-            //       <PasswordIcon />
-            //     </InputAdornment>
-            //   ),
-            // }}
             variant="standard"
           />
           <Typography variant="overline" display="block" gutterBottom>
