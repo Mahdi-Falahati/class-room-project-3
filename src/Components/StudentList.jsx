@@ -24,7 +24,7 @@ export default function StudentList() {
             }}
           >
             <DialogAddPerson
-              title="Add Student"
+              title="Student"
               Organization="APS"
               Class="APS3E"
               icon={<PersonAddIcon />}

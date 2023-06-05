@@ -13,7 +13,7 @@ export default function TeachersList({ user }) {
       <Grid container columns={12}>
         <Grid item xs={12} sx={{ textAlign: "center" }}>
           <DialogAddPerson
-            title="Add Teacher"
+            title="Teacher"
             Organization="APS"
             Class="APS3E"
             icon={<PersonAddIcon />}
