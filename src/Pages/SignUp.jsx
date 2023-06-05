@@ -6,7 +6,6 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
@@ -14,8 +13,8 @@ import LoginIcon from "@mui/icons-material/Login";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import PasswordIcon from "@mui/icons-material/Password";
-import ListItemText from "@mui/material/ListItemText";
 import { useState, useReducer } from "react";
+import { Alert } from "@mui/material";
 
 export default function SignUp() {
   const [value, setValue] = useState(options[0]);
@@ -24,6 +23,8 @@ export default function SignUp() {
   const [error, setError] = useState({
     username: false,
     password: false,
+    confirmPassword: false,
+    checkPassword: false,
     role: false,
   });
 
@@ -34,21 +35,60 @@ export default function SignUp() {
     dispatchInputData({ type: ActionType.Password, value: e.target.value });
   };
   const confirmPasswordHandler = (e) => {
-    // dispatchInputData({ type: ActionType.Password, value: e.target.value });
+    dispatchInputData({
+      type: ActionType.ConfirmPassword,
+      value: e.target.value,
+    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (inputValue.trim() && data.userName.trim() && data.password.trim()) {
-      setError({ username: false, password: false, role: false });
+    if (
+      inputValue.trim() &&
+      data.userName.trim() &&
+      data.password.trim() &&
+      data.ConfirmPassword.trim()
+    ) {
+      setError({
+        username: false,
+        password: false,
+        role: false,
+        confirmPassword: false,
+      });
     } else if (!data.userName.trim()) {
       setError({ ...error, username: true });
     } else if (!data.password.trim()) {
       setError({ ...error, username: false, password: true });
+    } else if (!data.confirmPassword.trim()) {
+      setError({
+        ...error,
+        username: false,
+        password: false,
+        confirmPassword: true,
+      });
     } else {
-      setError({ username: false, password: false, role: true });
+      setError({
+        username: false,
+        password: false,
+        confirmPassword: false,
+        role: true,
+      });
+    }
+    if (data.confirmPassword !== "" && data.password !== data.confirmPassword) {
+      setError({
+        username: false,
+        password: false,
+        confirmPassword: true,
+        checkPassword: true,
+        role: true,
+      });
     }
   };
+
+  // const handleSignUp =(e)=>{
+  //   e.preventDefault();
+
+  // }
 
   return (
     <ThemeProvider theme={theme}>
@@ -66,7 +106,7 @@ export default function SignUp() {
             <LockPersonIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            Sign Up
           </Typography>
           <Box
             component="form"
@@ -120,9 +160,9 @@ export default function SignUp() {
                   onChange={confirmPasswordHandler}
                   required
                   fullWidth
-                  error={error.password}
-                  value={data.password}
-                  id="Password"
+                  error={error.confirmPassword}
+                  value={data.confirmPassword}
+                  id="ConfirmPassword"
                   label="ConfirmPassword"
                   InputProps={{
                     startAdornment: (
@@ -133,6 +173,14 @@ export default function SignUp() {
                   }}
                   variant="standard"
                 />
+                {error.checkPassword ? (
+                  // <p error={error.confirmPassword} color="red">
+                  //   ConfirmPassword not match{" "}
+                  // </p>
+                  <Alert icon={false} severity="error">
+                    ConfirmPassword not match!
+                  </Alert>
+                ) : null}
               </Grid>
 
               <Grid item xs={12}>
@@ -198,6 +246,7 @@ const options = ["Admin", "Teacher", "Student"];
 const ActionType = {
   UserName: "__UserName",
   Password: "__Password",
+  ConfirmPassword: "__ConfirmPassword",
 };
 
 const formReducer = (state, action) => {
@@ -206,6 +255,8 @@ const formReducer = (state, action) => {
       return { ...state, userName: action.value };
     case ActionType.Password:
       return { ...state, password: action.value };
+    case ActionType.ConfirmPassword:
+      return { ...state, confirmPassword: action.value };
     default:
       break;
   }
@@ -214,4 +265,5 @@ const formReducer = (state, action) => {
 const initialValue = {
   userName: "",
   password: "",
+  confirmPassword: "",
 };
