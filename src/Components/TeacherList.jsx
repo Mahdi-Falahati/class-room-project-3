@@ -1,4 +1,4 @@
-import AddPerson from "./AddPerson";
+import DialogAddPerson from "./DialogAddPerson";
 import { Grid, List } from "@mui/material";
 import InfoContent from "./InfoContent";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -12,7 +12,7 @@ export default function TeachersList({ user }) {
     <List>
       <Grid container columns={12}>
         <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <AddPerson
+          <DialogAddPerson
             title="Add Teacher"
             Organization="APS"
             Class="APS3E"

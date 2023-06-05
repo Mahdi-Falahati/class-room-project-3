@@ -1,4 +1,4 @@
-import AddPerson from "./AddPerson";
+import DialogAddPerson from "./DialogAddPerson";
 import { Box, Grid, List } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 // import PersonInfo from "./InfoContent";
@@ -23,7 +23,7 @@ export default function StudentList() {
               flexWrap: "wrap",
             }}
           >
-            <AddPerson
+            <DialogAddPerson
               title="Add Student"
               Organization="APS"
               Class="APS3E"

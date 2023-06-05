@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 
 import { useReducer, useState } from "react";
 
-export default function AddPerson({ title, Organization, Class, icon }) {
+export default function DialogAddPerson({ title, Organization, Class, icon }) {
   const [open, setOpen] = useState(false);
   const [data, dispatchInputData] = useReducer(formReducer, initialValue);
   const [error, setError] = useState({
