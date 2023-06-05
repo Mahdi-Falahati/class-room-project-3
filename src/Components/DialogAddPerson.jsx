@@ -6,24 +6,38 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import Typography from "@mui/material/Typography";
+import Autocomplete from "@mui/material/Autocomplete";
 
 import { useReducer, useState } from "react";
 
-export default function AddPerson({ title, Organization, Class, icon }) {
+export default function DialogAddPerson({ title, Organization, Class, icon }) {
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [multipleValue, setMultipleValue] = useState([]);
   const [data, dispatchInputData] = useReducer(formReducer, initialValue);
   const [error, setError] = useState({
     username: false,
     password: false,
     confrimPassword: false,
   });
+  const [errorAdd, setErrorAdd] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (e) => {
     setOpen(true);
+    setOpen2(false);
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleClickOpen2 = () => {
+    setOpen2(true);
+    setOpen(false);
+  };
+
+  const handleClose2 = () => {
+    setOpen2(false);
   };
 
   const handleUserName = (e) => {
@@ -45,7 +59,7 @@ export default function AddPerson({ title, Organization, Class, icon }) {
     });
   };
 
-  const handleAddPerson = () => {
+  const handleNewPerson = () => {
     if (
       data.confrimPassword.trim() &&
       data.userName.trim() &&
@@ -62,6 +76,27 @@ export default function AddPerson({ title, Organization, Class, icon }) {
     }
   };
 
+  const handlePersons = (e) => {
+    const value = e.target.innerText.trim();
+    const existItem = multipleValue.includes(value);
+
+    if (existItem) {
+      const newState = multipleValue.filter((item) => item !== value);
+      setMultipleValue(newState);
+    } else {
+      setMultipleValue([...multipleValue, value]);
+    }
+  };
+
+  const handleAddPerson = () => {
+    if (multipleValue.length > 0) {
+      setErrorAdd(false);
+      setOpen(false);
+    } else {
+      setErrorAdd(true);
+    }
+  };
+
   return (
     <div style={{ margin: "10px" }}>
       <Button
@@ -70,17 +105,78 @@ export default function AddPerson({ title, Organization, Class, icon }) {
         endIcon={icon}
         onClick={handleClickOpen}
       >
-        {title}
+        Add {title}
       </Button>
-
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle sx={{ display: "flex", alignItems: "center" }}>
-          {title} <GroupAddIcon sx={{ marginLeft: "5px" }} />
+          Add {title}
+          <GroupAddIcon sx={{ marginLeft: "5px" }} />
+          <Button
+            sx={{
+              mx: 2,
+              border: "none",
+              borderBottom: "1px dotted",
+              borderRadius: "0px",
+              fontSize: "12px",
+            }}
+            endIcon={icon}
+            onClick={handleClickOpen2}
+          >
+            New {title}
+          </Button>
         </DialogTitle>
 
         <DialogContent sx={{ width: "300px" }}>
           {/* -------------------------------------------- username */}
+          <Autocomplete
+            multiple
+            onChange={handlePersons}
+            id="tags-standard"
+            options={["first", "secound"]}
+            getOptionLabel={(option) => option}
+            renderInput={(params) => (
+              <TextField
+                error={errorAdd}
+                {...params}
+                variant="standard"
+                label={title}
+                placeholder="Selected"
+              />
+            )}
+          />
+          <Typography variant="overline" display="block" gutterBottom>
+            {Organization} - {Class}
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleAddPerson}>Add</Button>
+        </DialogActions>
+      </Dialog>
 
+      {/* -------------------------------------------- new */}
+
+      <Dialog open={open2} onClose={handleClose2}>
+        <DialogTitle sx={{ display: "flex", alignItems: "center" }}>
+          New {title}
+          <GroupAddIcon sx={{ marginLeft: "5px" }} />
+          <Button
+            sx={{
+              mx: 2,
+              border: "none",
+              borderBottom: "1px dotted",
+              borderRadius: "0px",
+              fontSize: "12px",
+            }}
+            endIcon={icon}
+            onClick={handleClickOpen}
+          >
+            Add {title}
+          </Button>
+        </DialogTitle>
+
+        <DialogContent sx={{ width: "300px" }}>
+          {/* -------------------------------------------- username */}
           <TextField
             autoFocus
             error={error.username}
@@ -102,13 +198,6 @@ export default function AddPerson({ title, Organization, Class, icon }) {
             value={data.password}
             id="Password"
             label="Password"
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">
-            //       <PasswordIcon />
-            //     </InputAdornment>
-            //   ),
-            // }}
             variant="standard"
           />
           {/*-------------------------------------------- confirm pasword */}
@@ -120,13 +209,6 @@ export default function AddPerson({ title, Organization, Class, icon }) {
             value={data.confrimPassword}
             id="Password"
             label="ConfirmPassword"
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">
-            //       <PasswordIcon />
-            //     </InputAdornment>
-            //   ),
-            // }}
             variant="standard"
           />
           <Typography variant="overline" display="block" gutterBottom>
@@ -134,8 +216,8 @@ export default function AddPerson({ title, Organization, Class, icon }) {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleAddPerson}>Add</Button>
+          <Button onClick={handleClose2}>Cancel</Button>
+          <Button onClick={handleNewPerson}>Add</Button>
         </DialogActions>
       </Dialog>
     </div>
