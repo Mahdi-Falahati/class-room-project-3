@@ -162,11 +162,7 @@ export default function SignUp() {
               Sign Up
             </Button>
             <Grid textAlign="center">
-              <Link
-                color="secondary"
-                href="http://localhost:3000/"
-                underline="none"
-              >
+              <Link color="secondary" href="/" underline="none">
                 Login
               </Link>
             </Grid>
