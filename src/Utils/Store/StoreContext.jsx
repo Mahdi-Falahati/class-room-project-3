@@ -11,9 +11,9 @@ export function StoreProvider({ children }) {
 
   const updateSelectInfo = (info) => {
     if (info.type === "organ") {
-      setSelectInfo({ ...info, organ: info.value });
+      setSelectInfo({ ...selectInfo, organ: info.value });
     } else {
-      setSelectInfo({ ...info, class: info.value });
+      setSelectInfo({ ...selectInfo, class: info.value });
     }
   };
 
