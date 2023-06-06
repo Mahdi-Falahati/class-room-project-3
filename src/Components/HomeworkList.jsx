@@ -8,6 +8,15 @@ export default function HomeworkList({ user }) {
   const deleteHandler = (id) => {};
   const { data, selectInfo } = useContext(StoreContext);
 
+  const Classes = [];
+  data.organizations?.forEach((item) => {
+    if (item.name === selectInfo.organ) {
+      item.classes?.forEach((i) => {
+        Classes.push(i);
+      });
+    }
+  });
+  
   return (
     <List>
       <Grid container columns={12}>
