@@ -8,8 +8,7 @@ import { useContext } from "react";
 import { StoreContext } from "../Utils/Store/StoreContext";
 
 export default function SelectOptions({ user }) {
-  const { data, selectClass, updateSelectClass } = useContext(StoreContext);
-
+  const { data, selectInfo, updateSelectInfo } = useContext(StoreContext);
   const [isOrgan, setIsOrgan] = useState(false);
   const [isClass, setIsClass] = useState(false);
   const [error, setError] = useState({
@@ -23,7 +22,7 @@ export default function SelectOptions({ user }) {
 
   const Classes = [];
   data.organizations?.forEach((item) => {
-    if (item.name === selectClass) {
+    if (item.name === selectInfo.organ) {
       item.classes?.forEach((i) => {
         Classes.push(i);
       });
@@ -37,11 +36,11 @@ export default function SelectOptions({ user }) {
 
   const organistionValueHandler = (e) => {
     if (e.target.innerText) {
-      updateSelectClass(e.target.innerText);
+      updateSelectInfo({ type: "organ", value: e.target.innerText });
       setIsOrgan(true);
       setError({ ...error, organistion: false });
     } else {
-      updateSelectClass("");
+      updateSelectInfo({ type: "organ", value: "" });
       setError({ ...error, organistion: true });
       setIsOrgan(false);
       setIsClass(false);
@@ -50,13 +49,16 @@ export default function SelectOptions({ user }) {
 
   const ClassesValueHandler = (e) => {
     if (e.target.innerText) {
+      updateSelectInfo({ type: "class", value: e.target.innerText });
       setIsClass(true);
       setIsOrgan(false);
       setError({ ...error, classes: false });
     } else if (!e.target.innerText && !isOrgan && isClass) {
+      console.log("object");
       setIsOrgan(true);
       setIsClass(false);
       setError({ ...error, classes: true });
+      updateSelectInfo({ type: "class", value: "" });
     } else if (!e.target.innerText && !isOrgan && !isClass) {
       setIsOrgan(false);
       setIsClass(false);
