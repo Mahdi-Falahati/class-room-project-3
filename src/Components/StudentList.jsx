@@ -17,6 +17,15 @@ export default function StudentList() {
     }
   });
 
+  const Students = [];
+  Classes?.forEach((item) => {
+    if (item.name === selectInfo.class) {
+      item.students?.forEach((i) => {
+        Classes.push(i);
+      });
+    }
+  });
+
   const deleteHandler = (id) => {
     console.log(fakeData.filter((person) => person.id !== id));
   };
