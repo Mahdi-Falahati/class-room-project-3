@@ -16,7 +16,20 @@ export default function HomeworkList({ user }) {
       });
     }
   });
-  
+
+  const Homeworks = [];
+  Classes?.forEach((item) => {
+    if (item.name === selectInfo.class) {
+      item.students[0].homeworks.forEach((i) => {
+        Homeworks.push({
+          title: item.teacher.username,
+          id: item.teacher["_id"],
+          descrption:item.descrption
+        });
+      });
+    }
+  });
+
   return (
     <List>
       <Grid container columns={12}>
