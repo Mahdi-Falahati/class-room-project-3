@@ -8,11 +8,10 @@ import { useContext } from "react";
 import { StoreContext } from "../Utils/Store/StoreContext";
 
 export default function SelectOptions({ user }) {
-  const { data } = useContext(StoreContext);
+  const { data, selectClass, updateSelectClass } = useContext(StoreContext);
 
   const [isOrgan, setIsOrgan] = useState(false);
   const [isClass, setIsClass] = useState(false);
-  const [organterm, setOrganterm] = useState("");
   const [error, setError] = useState({
     organistion: true,
     classes: true,
@@ -24,7 +23,7 @@ export default function SelectOptions({ user }) {
 
   const Classes = [];
   data.organizations?.forEach((item) => {
-    if (item.name === organterm) {
+    if (item.name === selectClass) {
       item.classes?.forEach((i) => {
         Classes.push(i);
       });
@@ -38,11 +37,11 @@ export default function SelectOptions({ user }) {
 
   const organistionValueHandler = (e) => {
     if (e.target.innerText) {
-      setOrganterm(e.target.innerText);
+      updateSelectClass(e.target.innerText);
       setIsOrgan(true);
       setError({ ...error, organistion: false });
     } else {
-      setOrganterm("");
+      updateSelectClass("");
       setError({ ...error, organistion: true });
       setIsOrgan(false);
       setIsClass(false);
