@@ -4,10 +4,17 @@ export const StoreContext = createContext();
 
 export function StoreProvider({ children }) {
   const [data, setData] = useState([]);
-  const [selectClass, setSelectClass] = useState("");
+  const [selectInfo, setSelectInfo] = useState({
+    organ: "",
+    class: "",
+  });
 
-  const updateSelectClass = (newClass) => {
-    setSelectClass(newClass);
+  const updateSelectInfo = (info) => {
+    if (info.type === "organ") {
+      setSelectInfo({ ...info, organ: info.value });
+    } else {
+      setSelectInfo({ ...info, class: info.value });
+    }
   };
 
   const updateData = (newData) => {
@@ -17,9 +24,9 @@ export function StoreProvider({ children }) {
     <StoreContext.Provider
       value={{
         data,
-        selectClass,
+        selectInfo,
         updateData,
-        updateSelectClass,
+        updateSelectInfo,
       }}
     >
       {children}
