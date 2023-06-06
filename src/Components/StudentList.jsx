@@ -1,10 +1,14 @@
 import DialogAddPerson from "./DialogAddPerson";
 import { Box, Grid, List } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-// import PersonInfo from "./InfoContent";
 import InfoContent from "./InfoContent";
+import { useContext } from "react";
+import { StoreContext } from "../Utils/Store/StoreContext";
 
 export default function StudentList() {
+  const { data, selectInfo } = useContext(StoreContext);
+
+  
   const deleteHandler = (id) => {
     console.log(fakeData.filter((person) => person.id !== id));
   };
