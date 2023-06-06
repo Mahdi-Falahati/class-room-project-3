@@ -14,7 +14,6 @@ export default function ClassesList() {
       });
     }
   });
-  console.log(Classes);
 
   const deleteHandler = (id) => {};
 
