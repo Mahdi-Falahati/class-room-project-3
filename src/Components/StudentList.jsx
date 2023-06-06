@@ -8,7 +8,15 @@ import { StoreContext } from "../Utils/Store/StoreContext";
 export default function StudentList() {
   const { data, selectInfo } = useContext(StoreContext);
 
-  
+  const Classes = [];
+  data.organizations?.forEach((item) => {
+    if (item.name === selectInfo.organ) {
+      item.classes?.forEach((i) => {
+        Classes.push(i);
+      });
+    }
+  });
+
   const deleteHandler = (id) => {
     console.log(fakeData.filter((person) => person.id !== id));
   };
