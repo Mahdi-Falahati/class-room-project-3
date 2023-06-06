@@ -48,11 +48,3 @@ export default function ClassesList() {
     </List>
   );
 }
-
-const fakeClasses = [
-  { name: "htm", id: "1" },
-  { name: "css", id: "2" },
-  { name: "js", id: "3" },
-  { name: "react", id: "4" },
-  { name: "redux", id: "5" },
-];
