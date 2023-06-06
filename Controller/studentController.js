@@ -10,7 +10,7 @@ const getStudent = async (req, res) => {
     if (!allStudents)
       return res.status(204).json({ message: "No student found" });
 
-    const student = allStudents.filter((std) => std.username === username);
+    const student = allStudents.filter((std) => std.username === username)[0];
     if (!student) return res.json({ message: "username is wrong" });
     if (student.password !== password)
       return res.json({ message: "password is wrong" });

@@ -10,7 +10,7 @@ const getTeacher = async (req, res) => {
     if (!allTeachers)
       return res.status(204).json({ message: "No teacher found" });
 
-    const teacher = allTeachers.filter((tch) => tch.username === username);
+    const teacher = allTeachers.filter((tch) => tch.username === username)[0];
     if (!teacher) return res.json({ message: "username is wrong" });
     if (teacher.password !== password)
       return res.json({ message: "password is wrong" });
