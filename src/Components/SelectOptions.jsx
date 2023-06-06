@@ -5,19 +5,18 @@ import TextField from "@mui/material/TextField";
 import OwnerContent from "./OwnerContent";
 import { useState } from "react";
 
-export default function SelectOptions({ user }) {
+export default function SelectOptions({ user, organizations}) {
   const [isOrgan, setIsOrgan] = useState(false);
   const [isClass, setIsClass] = useState(false);
   const [error, setError] = useState({
     organistion: true,
     classes: true,
   });
-
   const defaultPropsOrganistion = {
-    options: Organistion,
-    getOptionLabel: (option) => option,
+    options: organizations,
+    getOptionLabel: (option) => option.name,
   };
-
+  
   const defaultPropsClasses = {
     options: Classes,
     getOptionLabel: (option) => option,
@@ -115,5 +114,4 @@ export default function SelectOptions({ user }) {
   );
 }
 
-const Organistion = ["APS", "Youtube", "Google"];
 const Classes = ["APS-3a", "APS-3b", "APS-3c", "APS-3e"];
