@@ -1,6 +1,6 @@
 import { Grid, List } from "@mui/material";
-import PersonInfo from "./InfoContent";
 import DialogAddClass from "./DialogAddClass";
+import ClassInfo from "./ClassInfo";
 
 export default function ClassesList() {
   const deleteHandler = (id) => {};
@@ -23,7 +23,7 @@ export default function ClassesList() {
           }}
         >
           {fakeClasses?.map((info, index) => (
-            <PersonInfo
+            <ClassInfo
               key={index}
               OnDelete={deleteHandler}
               Name={info.name}
