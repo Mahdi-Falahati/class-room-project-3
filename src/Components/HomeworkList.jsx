@@ -1,9 +1,34 @@
 import { Grid, List } from "@mui/material";
 import HomeworkInfo from "./HomeworkInfo";
 import DialogAddHomework from "./DialogAddHomeWork";
+import { useContext } from "react";
+import { StoreContext } from "../Utils/Store/StoreContext";
 
 export default function HomeworkList({ user }) {
   const deleteHandler = (id) => {};
+  const { data, selectInfo } = useContext(StoreContext);
+
+  const Classes = [];
+  data.organizations?.forEach((item) => {
+    if (item.name === selectInfo.organ) {
+      item.classes?.forEach((i) => {
+        Classes.push(i);
+      });
+    }
+  });
+
+  const Homeworks = [];
+  Classes?.forEach((item) => {
+    if (item.name === selectInfo.class) {
+      item.students[0].homeworks.forEach((i) => {
+        Homeworks.push({
+          title: item.teacher.username,
+          id: item.teacher["_id"],
+          descrption:item.descrption
+        });
+      });
+    }
+  });
 
   return (
     <List>
@@ -22,11 +47,11 @@ export default function HomeworkList({ user }) {
             bgcolor: "background.paper",
           }}
         >
-          {fakeHw?.map((info, index) => (
+          {Homeworks?.map((info, index) => (
             <HomeworkInfo
               key={index}
               OnDelete={deleteHandler}
-              Name={info.name}
+              Name={info.title}
               ID={info.id}
               user={user}
             />
@@ -36,11 +61,3 @@ export default function HomeworkList({ user }) {
     </List>
   );
 }
-
-const fakeHw = [
-  { name: "h1", id: "1" },
-  { name: "hmw2", id: "2" },
-  { name: "hw3", id: "3" },
-  { name: "hw555", id: "4" },
-  { name: "hw666", id: "5" },
-];

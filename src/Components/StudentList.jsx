@@ -1,12 +1,36 @@
 import DialogAddPerson from "./DialogAddPerson";
 import { Box, Grid, List } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-// import PersonInfo from "./InfoContent";
 import InfoContent from "./InfoContent";
+import { useContext } from "react";
+import { StoreContext } from "../Utils/Store/StoreContext";
 
 export default function StudentList() {
+  const { data, selectInfo } = useContext(StoreContext);
+
+  const Classes = [];
+  data.organizations?.forEach((item) => {
+    if (item.name === selectInfo.organ) {
+      item.classes?.forEach((i) => {
+        Classes.push(i);
+      });
+    }
+  });
+
+  const Students = [];
+  Classes?.forEach((item) => {
+    if (item.name === selectInfo.class) {
+      item.students?.forEach((i) => {
+        Students.push({
+          userName: item.teacher.username,
+          id: item.teacher["_id"],
+        });
+      });
+    }
+  });
+
   const deleteHandler = (id) => {
-    console.log(fakeData.filter((person) => person.id !== id));
+    console.log(Students.filter((person) => person.id !== id));
   };
 
   return (
@@ -41,11 +65,11 @@ export default function StudentList() {
               bgcolor: "background.paper",
             }}
           >
-            {fakeData?.map((info, index) => (
+            {Students?.map((info, index) => (
               <InfoContent
                 key={index}
                 OnDelete={deleteHandler}
-                Name={info.name}
+                Name={info.userName}
                 ID={info.id}
               />
             ))}
@@ -55,11 +79,3 @@ export default function StudentList() {
     </Box>
   );
 }
-
-const fakeData = [
-  { name: "RC", id: "1" },
-  { name: "Mahdi", id: "2" },
-  { name: "Fateme", id: "3" },
-  { name: "Zahra", id: "4" },
-  { name: "Vesal", id: "5" },
-];
