@@ -61,11 +61,3 @@ export default function HomeworkList({ user }) {
     </List>
   );
 }
-
-const fakeHw = [
-  { name: "h1", id: "1" },
-  { name: "hmw2", id: "2" },
-  { name: "hw3", id: "3" },
-  { name: "hw555", id: "4" },
-  { name: "hw666", id: "5" },
-];
