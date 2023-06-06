@@ -21,7 +21,10 @@ export default function StudentList() {
   Classes?.forEach((item) => {
     if (item.name === selectInfo.class) {
       item.students?.forEach((i) => {
-        Classes.push(i);
+        Students.push({
+          userName: item.teacher.username,
+          id: item.teacher["_id"],
+        });
       });
     }
   });
@@ -66,7 +69,7 @@ export default function StudentList() {
               <InfoContent
                 key={index}
                 OnDelete={deleteHandler}
-                Name={info.name}
+                Name={info.userName}
                 ID={info.id}
               />
             ))}
