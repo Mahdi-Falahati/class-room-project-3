@@ -65,7 +65,7 @@ export default function StudentList() {
               bgcolor: "background.paper",
             }}
           >
-            {fakeData?.map((info, index) => (
+            {Students?.map((info, index) => (
               <InfoContent
                 key={index}
                 OnDelete={deleteHandler}
