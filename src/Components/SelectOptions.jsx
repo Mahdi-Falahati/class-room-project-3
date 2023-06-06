@@ -4,8 +4,12 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import OwnerContent from "./OwnerContent";
 import { useState } from "react";
+import { useContext } from "react";
+import { StoreContext } from "../Utils/Store/StoreContext";
 
-export default function SelectOptions({ user, data }) {
+export default function SelectOptions({ user }) {
+  const { data } = useContext(StoreContext);
+
   const [isOrgan, setIsOrgan] = useState(false);
   const [isClass, setIsClass] = useState(false);
   const [organterm, setOrganterm] = useState("");
@@ -14,12 +18,12 @@ export default function SelectOptions({ user, data }) {
     classes: true,
   });
   const defaultPropsOrganistion = {
-    options: data,
+    options: data.organizations,
     getOptionLabel: (option) => option.name,
   };
 
   const Classes = [];
-  data?.forEach((item) => {
+  data.organizations?.forEach((item) => {
     if (item.name === organterm) {
       item.classes?.forEach((i) => {
         Classes.push(i);
