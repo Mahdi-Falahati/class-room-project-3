@@ -5,28 +5,40 @@ import TextField from "@mui/material/TextField";
 import OwnerContent from "./OwnerContent";
 import { useState } from "react";
 
-export default function SelectOptions({ user, organizations}) {
+export default function SelectOptions({ user, data }) {
   const [isOrgan, setIsOrgan] = useState(false);
   const [isClass, setIsClass] = useState(false);
+  const [organterm, setOrganterm] = useState("");
   const [error, setError] = useState({
     organistion: true,
     classes: true,
   });
   const defaultPropsOrganistion = {
-    options: organizations,
+    options: data,
     getOptionLabel: (option) => option.name,
   };
-  
+
+  const Classes = [];
+  data?.forEach((item) => {
+    if (item.name === organterm) {
+      item.classes?.forEach((i) => {
+        Classes.push(i);
+      });
+    }
+  });
+
   const defaultPropsClasses = {
     options: Classes,
-    getOptionLabel: (option) => option,
+    getOptionLabel: (option) => option.name,
   };
 
   const organistionValueHandler = (e) => {
     if (e.target.innerText) {
+      setOrganterm(e.target.innerText);
       setIsOrgan(true);
       setError({ ...error, organistion: false });
     } else {
+      setOrganterm("");
       setError({ ...error, organistion: true });
       setIsOrgan(false);
       setIsClass(false);
