@@ -2,21 +2,14 @@ import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import DialogAsignHomeWork from "./DialogAsignHomeWork";
 import DeleteBtn from "./DeleteBtn";
 import CheckBtn from "./CheckBtn";
 
-export default function HomeworkInfo({
-  Name,
-  AvatarSrc = "",
-  ID,
-  OnDelete,
-  user,
-}) {
-  
+export default function HomeworkInfo({ Name, ID, user }) {
   return (
     <Box sx={{ m: 2 }}>
       <ListItem
@@ -28,7 +21,7 @@ export default function HomeworkInfo({
         }}
       >
         <ListItemAvatar>
-          <Avatar alt={Name} src={AvatarSrc} />
+          <AssignmentIcon sx={{ color: "gray" }} />
         </ListItemAvatar>
         <ListItemText
           secondary={
