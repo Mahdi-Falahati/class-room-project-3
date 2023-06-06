@@ -1,8 +1,8 @@
 import { Grid, List } from "@mui/material";
-import PersonInfo from "./InfoContent";
 import DialogAddClass from "./DialogAddClass";
 import { useContext } from "react";
 import { StoreContext } from "../Utils/Store/StoreContext";
+import ClassInfo from "./ClassInfo";
 
 export default function ClassesList() {
   const { data, selectInfo } = useContext(StoreContext);
