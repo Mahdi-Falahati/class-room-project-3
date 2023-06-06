@@ -30,7 +30,7 @@ export default function StudentList() {
   });
 
   const deleteHandler = (id) => {
-    console.log(fakeData.filter((person) => person.id !== id));
+    console.log(Students.filter((person) => person.id !== id));
   };
 
   return (
