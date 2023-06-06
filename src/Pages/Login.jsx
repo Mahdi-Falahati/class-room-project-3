@@ -122,7 +122,7 @@ export default function Login() {
                   fullWidth
                   error={error.username}
                   id="UserName"
-                  label="Email Address Or UserName"
+                  label="UserName"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
