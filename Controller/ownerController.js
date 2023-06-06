@@ -10,14 +10,10 @@ const getOrganOwner = async (req, res) => {
       path: "organizations",
       populate: {
         path: "classes",
-        populate: {
-          path: "teachers",
-          model: "Teacher",
-        },
-        populate: {
-          path: "students",
-          model: "Student",
-        },
+        populate: [
+          { path: "teachers" },
+          { path: "students", populate: { path: "homeworks" } },
+        ],
       },
     });
 
@@ -25,7 +21,8 @@ const getOrganOwner = async (req, res) => {
       return res.status(204).json({ message: "No organization owner found" });
 
     const organizationOwner = allOwner.filter(
-      (owner) => owner.username === username)[0];
+      (owner) => owner.username === username
+    )[0];
     if (!organizationOwner) return res.json({ message: "username is wrong" });
     if (organizationOwner.password !== password)
       return res.json({ message: "password is wrong" });
