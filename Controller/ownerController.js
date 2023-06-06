@@ -11,7 +11,7 @@ const getOrganOwner = async (req, res) => {
       populate: {
         path: "classes",
         populate: [
-          { path: "teachers" },
+          { path: "teacher" },
           { path: "students", populate: { path: "homeworks" } },
         ],
       },

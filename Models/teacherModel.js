@@ -27,17 +27,10 @@ teacherSchema.pre("save", async function (next) {
   const teacher = this;
 
   const classPromises = teacher.classes.map((classId) =>
-    Class.findById(classId)
+    Class.updateOne({ _id: classId }, { $set: { teacher: teacher._id } })
   );
 
-  const classes = await Promise.all(classPromises);
-
-  classes.forEach((myClass) => {
-    if (myClass) {
-      myClass.teachers.push(teacher._id);
-      myClass.save();
-    }
-  });
+  await Promise.all(classPromises);
 
   next();
 });
@@ -52,17 +45,10 @@ Teacher.deleteTeacherAndRemoveFromClass = async function (teacherId) {
   }
 
   const classPromises = teacher.classes.map((classId) =>
-    Class.findById(classId)
+    Class.updateOne({ _id: classId }, { $set: { teacher: null } })
   );
 
-  const classes = await Promise.all(classPromises);
-
-  classes.forEach((myClass) => {
-    if (myClass) {
-      myClass.teachers.pull(teacherId);
-      myClass.save();
-    }
-  });
+  await Promise.all(classPromises);
 };
 
 module.exports = Teacher;

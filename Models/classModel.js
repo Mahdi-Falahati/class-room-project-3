@@ -6,13 +6,12 @@ const classSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  teachers: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Teacher",
-      default: [],
-    },
-  ],
+  teacher: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Teacher",
+    default: null,
+  },
+
   students: [
     {
       type: mongoose.Schema.Types.ObjectId,

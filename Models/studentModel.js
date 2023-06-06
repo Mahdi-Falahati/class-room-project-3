@@ -35,17 +35,10 @@ studentSchema.pre("save", async function (next) {
   const student = this;
 
   const classPromises = student.classes.map((classId) =>
-    Class.findById(classId)
+    Class.updateOne({ _id: classId }, { $addToSet: { students: student._id } })
   );
 
-  const classes = await Promise.all(classPromises);
-
-  classes.forEach((myClass) => {
-    if (myClass) {
-      myClass.students.push(student._id);
-      myClass.save();
-    }
-  });
+  await Promise.all(classPromises);
 
   next();
 });
@@ -60,17 +53,10 @@ Student.deleteStudentAndRemoveFromClass = async function (studentId) {
   }
 
   const classPromises = student.classes.map((classId) =>
-    Class.findById(classId)
+    Class.updateOne({ _id: classId }, { $pull: { students: teacherId } })
   );
 
-  const classes = await Promise.all(classPromises);
-
-  classes.forEach((myClass) => {
-    if (myClass) {
-      myClass.students.pull(studentId);
-      myClass.save();
-    }
-  });
+  await Promise.all(classPromises);
 };
 
 module.exports = Student;
