@@ -1,9 +1,12 @@
 import { Grid, List } from "@mui/material";
 import HomeworkInfo from "./HomeworkInfo";
 import DialogAddHomework from "./DialogAddHomeWork";
+import { useContext } from "react";
+import { StoreContext } from "../Utils/Store/StoreContext";
 
 export default function HomeworkList({ user }) {
   const deleteHandler = (id) => {};
+  const { data, selectInfo } = useContext(StoreContext);
 
   return (
     <List>
