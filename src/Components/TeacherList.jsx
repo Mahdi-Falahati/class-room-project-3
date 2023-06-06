@@ -26,7 +26,7 @@ export default function TeachersList({ user }) {
   });
 
   const deleteHandler = (id) => {
-    console.log(fakeData.filter((person) => person.id !== id));
+    console.log(Teachers.filter((person) => person.id !== id));
   };
 
   return (
