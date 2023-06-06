@@ -6,7 +6,9 @@ const Student = require("../Models/studentModel");
 const getStudent = async (req, res) => {
   const { username, password } = req?.body;
   try {
-    const allStudents = await Student.find();
+    const allStudents = await Student.find()
+      .populate("homeworks")
+      .populate("classes");
     if (!allStudents)
       return res.status(204).json({ message: "No student found" });
 

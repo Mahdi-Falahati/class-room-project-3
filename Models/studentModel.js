@@ -10,11 +10,13 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  homeworks: {
-    type: Array,
-    required: true,
-    default: [],
-    /*
+  homeworks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Homework",
+    },
+  ],
+  /*
     {
       title: "",
       description: "",
@@ -22,7 +24,6 @@ const studentSchema = new mongoose.Schema({
       grade: ""
     }
     */
-  },
   classes: [
     {
       type: mongoose.Schema.Types.ObjectId,

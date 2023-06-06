@@ -1,12 +1,12 @@
 const Teacher = require("../Models/teacherModel");
 
 // @desc - get a teacher
-// @route - Post '/getTeacher'
+// @route - POST '/getTeacher'
 // @access - public
 const getTeacher = async (req, res) => {
   const { username, password } = req?.body;
   try {
-    const allTeachers = await Teacher.find();
+    const allTeachers = await Teacher.find().populate("classes");
     if (!allTeachers)
       return res.status(204).json({ message: "No teacher found" });
 
