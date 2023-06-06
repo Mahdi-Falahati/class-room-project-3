@@ -125,5 +125,3 @@ export default function SelectOptions({ user, data }) {
     </Grid>
   );
 }
-
-const Classes = ["APS-3a", "APS-3b", "APS-3c", "APS-3e"];
