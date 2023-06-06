@@ -1,8 +1,21 @@
 import { Grid, List } from "@mui/material";
 import PersonInfo from "./InfoContent";
 import DialogAddClass from "./DialogAddClass";
+import { useContext } from "react";
+import { StoreContext } from "../Utils/Store/StoreContext";
 
 export default function ClassesList() {
+  const { data, selectInfo } = useContext(StoreContext);
+  const Classes = [];
+  data.organizations?.forEach((item) => {
+    if (item.name === selectInfo.organ) {
+      item.classes?.forEach((i) => {
+        Classes.push(i);
+      });
+    }
+  });
+  console.log(Classes);
+
   const deleteHandler = (id) => {};
 
   return (
@@ -22,9 +35,9 @@ export default function ClassesList() {
             bgcolor: "background.paper",
           }}
         >
-          {fakeClasses?.map((info, index) => (
+          {Classes?.map((info) => (
             <PersonInfo
-              key={index}
+              key={info.id}
               OnDelete={deleteHandler}
               Name={info.name}
               ID={info.id}
