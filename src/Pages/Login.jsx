@@ -14,15 +14,18 @@ import LoginIcon from "@mui/icons-material/Login";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import PasswordIcon from "@mui/icons-material/Password";
-import { useState, useReducer } from "react";
+import { useState, useReducer, useContext } from "react";
 import { getOrganOwner, getTeacher, getStudent } from "../API/API";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Utils/Auth";
+import { StoreContext } from "../Utils/Store/StoreContext";
 
 export default function Login() {
   const auth = useAuth();
+  const { updateData } = useContext(StoreContext);
 
   const navigate = useNavigate();
+
   const [value, setValue] = useState(options[0]);
   const [inputValue, setInputValue] = useState("");
   const [data, dispatchInputData] = useReducer(formReducer, initialValue);
@@ -65,6 +68,7 @@ export default function Login() {
           username: data.userName,
           password: data.password,
         });
+        updateData(organOwner)
         if (organOwner._id) flag = true;
         changPage("/Owner", flag);
         break;
@@ -73,6 +77,7 @@ export default function Login() {
           username: data.userName,
           password: data.password,
         });
+        updateData(teacher)
         if (teacher._id) flag = true;
         changPage("/Teacher", flag);
         break;
@@ -81,6 +86,7 @@ export default function Login() {
           username: data.userName,
           password: data.password,
         });
+        updateData(student)
         if (student._id) flag = true;
         changPage("/Student", flag);
         break;
