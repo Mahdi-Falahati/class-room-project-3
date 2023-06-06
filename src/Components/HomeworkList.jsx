@@ -47,11 +47,11 @@ export default function HomeworkList({ user }) {
             bgcolor: "background.paper",
           }}
         >
-          {fakeHw?.map((info, index) => (
+          {Homeworks?.map((info, index) => (
             <HomeworkInfo
               key={index}
               OnDelete={deleteHandler}
-              Name={info.name}
+              Name={info.title}
               ID={info.id}
               user={user}
             />
