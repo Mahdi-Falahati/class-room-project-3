@@ -12,7 +12,10 @@ const getOrganOwner = async (req, res) => {
         path: "classes",
         populate: [
           { path: "teacher" },
-          { path: "students", populate: { path: "homeworks" } },
+          {
+            path: "students",
+            populate: { path: "homeworks", model: "Homework" },
+          },
         ],
       },
     });
