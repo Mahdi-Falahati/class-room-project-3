@@ -2,8 +2,29 @@ import DialogAddPerson from "./DialogAddPerson";
 import { Grid, List } from "@mui/material";
 import InfoContent from "./InfoContent";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { useContext } from "react";
+import { StoreContext } from "../Utils/Store/StoreContext";
 
 export default function TeachersList({ user }) {
+  const { data, selectInfo } = useContext(StoreContext);
+
+  const Classes = [];
+  data.organizations?.forEach((item) => {
+    if (item.name === selectInfo.organ) {
+      item.classes?.forEach((i) => {
+        Classes.push(i);
+      });
+    }
+  });
+
+  const Teachers = [];
+  Classes.forEach((item) => {
+    Teachers.push({
+      userName: item.teacher.username,
+      id: item.teacher["_id"],
+    });
+  });
+
   const deleteHandler = (id) => {
     console.log(fakeData.filter((person) => person.id !== id));
   };
@@ -30,11 +51,11 @@ export default function TeachersList({ user }) {
             bgcolor: "background.paper",
           }}
         >
-          {fakeData?.map((info, index) => (
+          {Teachers?.map((info, index) => (
             <InfoContent
               key={index}
               OnDelete={deleteHandler}
-              Name={info.name}
+              Name={info.userName}
               ID={info.id}
             />
           ))}
