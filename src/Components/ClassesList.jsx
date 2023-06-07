@@ -35,7 +35,7 @@ export default function ClassesList() {
           }}
         >
           {Classes?.map((info) => (
-            <PersonInfo
+            <ClassInfo
               key={info.id}
               OnDelete={deleteHandler}
               Name={info.name}
