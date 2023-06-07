@@ -5,6 +5,10 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DialogAsignHomeWork from "./DialogAsignHomeWork";
 import DeleteBtn from "./DeleteBtn";
 import CheckBtn from "./CheckBtn";
@@ -26,6 +30,12 @@ export default function HomeworkInfo({ Name, ID, user }) {
         <ListItemText
           secondary={
             <>
+            <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
               <Typography
                 sx={{
                   display: "inline",
@@ -40,6 +50,14 @@ export default function HomeworkInfo({ Name, ID, user }) {
               >
                 {Name}
               </Typography>
+</AccordionSummary>
+                <AccordionDetails>
+                  <Typography>
+                    {Name}: This homework assigned for all student who attend in
+                    this class. please do it on time.
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
             </>
           }
         />
