@@ -6,15 +6,18 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { Autocomplete, Box, TextField } from "@mui/material";
-import { forwardRef, useState } from "react";
+import { forwardRef, useContext, useState } from "react";
 import SchoolIcon from "@mui/icons-material/School";
 import ClassIcon from "@mui/icons-material/Class";
+import { StoreContext } from "../Utils/Store/StoreContext";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function DialogClass() {
+  const { data } = useContext(StoreContext);
+
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [selectOrgan, setSelectOrgan] = useState("");
@@ -25,8 +28,8 @@ export default function DialogClass() {
   });
 
   const defaultProps = {
-    options: [],
-    getOptionLabel: (option) => option.title,
+    options: data.organizations,
+    getOptionLabel: (option) => option.name,
   };
 
   const handleClickOpen = () => {
