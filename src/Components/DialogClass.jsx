@@ -16,6 +16,8 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 export default function DialogClass() {
   const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [selectOrgan, setSelectOrgan] = useState("");
 
   const defaultProps = {
     options: [],
@@ -27,6 +29,18 @@ export default function DialogClass() {
   };
 
   const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleOragan = (e) => {
+    setSelectOrgan(e.target.innerText);
+  };
+
+  const handleAdd = () => {
     setOpen(false);
   };
 
@@ -60,24 +74,28 @@ export default function DialogClass() {
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <SchoolIcon sx={{ mr: 1, mt: 2 }} />
                 <TextField
+                  value={title}
+                  onChange={handleChangeTitle}
                   id="input-with-sx"
                   label="Class Name"
                   variant="standard"
                   sx={{ width: "230px" }}
                 />
               </Box>
-              <Box sx={{ display: "flex",mt:3, alignItems: "center" }}>
+              <Box sx={{ display: "flex", mt: 3, alignItems: "center" }}>
                 <ClassIcon sx={{ mr: 1, mt: 2 }} />
                 <Autocomplete
-                    sx={{width:"230px"}}
+                  onChange={handleOragan}
+                  sx={{ width: "230px" }}
                   {...defaultProps}
                   id="clear-on-escape"
                   clearOnEscape
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label="clearOnEscape"
+                      label="Select Organ"
                       variant="standard"
+                      value={selectOrgan}
                     />
                   )}
                 />
@@ -87,7 +105,7 @@ export default function DialogClass() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>cancel</Button>
-          <Button onClick={handleClose}>Add</Button>
+          <Button onClick={handleAdd}>Add</Button>
         </DialogActions>
       </Dialog>
     </div>
