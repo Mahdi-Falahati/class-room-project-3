@@ -8,6 +8,7 @@ export default function HomeworkList({ user }) {
   const deleteHandler = (id) => {};
   const { data, selectInfo } = useContext(StoreContext);
 
+  console.log(data);
   const Classes = [];
   data.organizations?.forEach((item) => {
     if (item.name === selectInfo.organ) {
@@ -18,7 +19,16 @@ export default function HomeworkList({ user }) {
   });
 
   const Homeworks = [];
+  data.homeworks?.map((item) =>
+    Homeworks.push({
+      title: item.title,
+      id: item["_id"],
+      descrption: item.descrption,
+    })
+  );
+
   Classes?.forEach((item) => {
+    console.log(item);
     if (item.name === selectInfo.class) {
       item.students[0].homeworks.forEach((i) => {
         Homeworks.push({
@@ -52,6 +62,7 @@ export default function HomeworkList({ user }) {
               key={index}
               OnDelete={deleteHandler}
               Name={info.title}
+              Discription={info.Discription}
               ID={info.id}
               user={user}
             />

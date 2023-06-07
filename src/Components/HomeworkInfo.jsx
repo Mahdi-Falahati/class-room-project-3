@@ -13,7 +13,7 @@ import DialogAsignHomeWork from "./DialogAsignHomeWork";
 import DeleteBtn from "./DeleteBtn";
 import CheckBtn from "./CheckBtn";
 
-export default function HomeworkInfo({ Name, ID, user }) {
+export default function HomeworkInfo({ Name, ID, user, Discription }) {
   return (
     <Box sx={{ m: 2 }}>
       <ListItem
@@ -30,32 +30,29 @@ export default function HomeworkInfo({ Name, ID, user }) {
         <ListItemText
           secondary={
             <>
-            <Accordion>
+              <Accordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
-              <Typography
-                sx={{
-                  display: "inline",
-                  fontWeight: "bold",
-                  fontStyle: "italic",
-                  fontSize: "16px",
-                  color: "#666",
-                }}
-                component="span"
-                variant="overline"
-                color="text.primary"
-              >
-                {Name}
-              </Typography>
-</AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    {Name}: This homework assigned for all student who attend in
-                    this class. please do it on time.
+                  <Typography
+                    sx={{
+                      display: "inline",
+                      fontWeight: "bold",
+                      fontStyle: "italic",
+                      fontSize: "16px",
+                      color: "#666",
+                    }}
+                    component="span"
+                    variant="overline"
+                    color="text.primary"
+                  >
+                    {Name}
                   </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>{Discription}</Typography>
                 </AccordionDetails>
               </Accordion>
             </>
