@@ -1,5 +1,22 @@
 const Organization = require("../Models/organizationModel");
 
+// @desc - get an organization
+// @route - POST '/getOrganization'
+// @access - public
+const getOrganization = async (req, res) => {
+  const { id } = req?.body;
+  if (!id)
+    return res.status(400).json({ message: `organization ID is required.` });
+  try {
+    const organization = await Organization.findOne({ _id: id }).populate(
+      "classes"
+    );
+    res.json(organization);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // @desc - create an organization
 // @route - POST '/organizations'
 // @access - public
@@ -33,4 +50,4 @@ const deleteOrganization = async (req, res) => {
   }
 };
 
-module.exports = { createOrganization, deleteOrganization };
+module.exports = { getOrganization, createOrganization, deleteOrganization };

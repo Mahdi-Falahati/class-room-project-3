@@ -3,6 +3,7 @@ const { createClass, deleteClass } = require("../Controller/classController");
 const {
   createOrganization,
   deleteOrganization,
+  getOrganization,
 } = require("../Controller/organizationsController");
 const {
   createOwner,
@@ -34,7 +35,7 @@ router.route("/getStudent").post(getStudent);
 router.route("/getTeacher").post(getTeacher);
 router.route("/organizationOwner").post(createOwner).put(updateOwner);
 router.route("/getOrganizationOwner").post(getOrganOwner);
-
+router.route("/getOrganization").post(getOrganization);
 router
   .route("/organizations")
   .post(createOrganization)
