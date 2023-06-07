@@ -78,12 +78,13 @@ export default function SelectOptionOwner({ user }) {
         setIsClass(false);
       }
     } else {
-      if (e.target.value) {
-        setValueOrganSelect(e.target.value);
+      if (e.target.innerText) {
+        setValueOrganSelect(e.target.innerText);
         updateSelectInfo({ type: "organ", value: e.target.innerText });
         setIsOrgan(false);
         setError({ ...error, organistion: false });
       } else {
+        updateSelectInfo({ type: "organ", value: "" });
         setError({ ...error, organistion: true });
         setIsOrgan(false);
         setIsClass(false);
