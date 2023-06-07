@@ -3,8 +3,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import DialogOrgan from "./DialogOrgan";
-import DialogClass from "./DialogClass";
+import BurgerMenu from "./BurgerMenu";
 
 export default function SubHeader({ user }) {
   const subHeader = () => {
@@ -60,9 +59,7 @@ export default function SubHeader({ user }) {
               fontWeight: "bold",
             }}
           >
-            <DialogOrgan />
-            |
-            <DialogClass />
+            <BurgerMenu />
           </ListSubheader>
         </Grid>
       </Grid>
