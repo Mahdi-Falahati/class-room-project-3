@@ -6,47 +6,95 @@ import OwnerContent from "./OwnerContent";
 import { useState } from "react";
 import { useContext } from "react";
 import { StoreContext } from "../Utils/Store/StoreContext";
+import { getOrganization } from "../API/API";
 
-export default function SelectOptions({ user }) {
-  const { data, selectInfo, updateSelectInfo } = useContext(StoreContext);
+export default function SelectOptionOwner({ user }) {
+  const { data, selectInfo, updateSelectInfo, updateData } =
+    useContext(StoreContext);
   const [isOrgan, setIsOrgan] = useState(false);
   const [isClass, setIsClass] = useState(false);
+  const [valueOrganSelect, setValueOrganSelect] = useState("");
+  const [vlueClassSelect, setValueClassSelect] = useState("");
   const [error, setError] = useState({
     organistion: true,
     classes: true,
   });
+
+  const Classes = [];
+
+  // --------------- get organs of student
+  const organOfStudentArr = [];
+  const getOrgan = async (id) => {
+    const organOfStudent = await getOrganization("/getOrganization", {
+      id: id,
+    });
+    organOfStudentArr.push(organOfStudent);
+    console.log("organ name", organOfStudent.name);
+    console.log("organ valueOrganSelect", valueOrganSelect);
+    if (organOfStudent.name === valueOrganSelect) {
+      console.log("shar1");
+      data.classes?.map((cls) => {
+        console.log("map");
+        if (cls.organization === organOfStudent._id) {
+          console.log("shr2");
+          Classes.push(cls);
+        }
+      });
+    }
+  };
+
+  // ---------------- end
+  // ------------------------
+  if (user === "Admin") {
+    data.organizations?.forEach((item) => {
+      if (item.name === selectInfo.organ) {
+        item.classes?.forEach((i) => {
+          Classes.push(i);
+        });
+      }
+    });
+  } else {
+    data.classes?.forEach((item) => {
+      getOrgan(item.organization);
+    });
+  }
+  console.log(Classes);
   const defaultPropsOrganistion = {
-    options: data.organizations,
+    options: data.organizations || organOfStudentArr,
     getOptionLabel: (option) => option.name,
   };
 
-  const Classes = [];
-  data.organizations?.forEach((item) => {
-    if (item.name === selectInfo.organ) {
-      item.classes?.forEach((i) => {
-        Classes.push(i);
-      });
+  const organistionValueHandler = (e) => {
+    if (user === "Admin") {
+      if (e.target.innerText) {
+        setValueOrganSelect(e.target.value);
+        updateSelectInfo({ type: "organ", value: e.target.innerText });
+        setIsOrgan(true);
+        setError({ ...error, organistion: false });
+      } else {
+        updateSelectInfo({ type: "organ", value: "" });
+        setError({ ...error, organistion: true });
+        setIsOrgan(false);
+        setIsClass(false);
+      }
+    } else {
+      if (e.target.value) {
+        setValueOrganSelect(e.target.value);
+        updateSelectInfo({ type: "organ", value: e.target.innerText });
+        setIsOrgan(false);
+        setError({ ...error, organistion: false });
+      } else {
+        setError({ ...error, organistion: true });
+        setIsOrgan(false);
+        setIsClass(false);
+      }
     }
-  });
+  };
 
   const defaultPropsClasses = {
     options: Classes,
     getOptionLabel: (option) => option.name,
   };
-
-  const organistionValueHandler = (e) => {
-    if (e.target.innerText) {
-      updateSelectInfo({ type: "organ", value: e.target.innerText });
-      setIsOrgan(true);
-      setError({ ...error, organistion: false });
-    } else {
-      updateSelectInfo({ type: "organ", value: "" });
-      setError({ ...error, organistion: true });
-      setIsOrgan(false);
-      setIsClass(false);
-    }
-  };
-
   const ClassesValueHandler = (e) => {
     if (e.target.innerText) {
       updateSelectInfo({ type: "class", value: e.target.innerText });
@@ -65,6 +113,7 @@ export default function SelectOptions({ user }) {
       setError({ ...error, classes: true });
     }
   };
+  console.log(valueOrganSelect);
 
   return (
     <Grid container columns={12} sx={{ minHeight: "97vh" }}>
