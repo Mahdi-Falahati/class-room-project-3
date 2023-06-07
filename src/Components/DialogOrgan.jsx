@@ -31,7 +31,7 @@ export default function DialogOrgan() {
   };
 
   const handleAdd = () => {
-   setOpen(false) 
+    setOpen(false);
   };
 
   return (
@@ -56,6 +56,7 @@ export default function DialogOrgan() {
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
               <AccountBalanceIcon sx={{ mr: 1, my: 0.5 }} />
               <TextField
+                value={title}
                 onChange={handleChangeTitle}
                 id="input-with-sx"
                 label="Organ Name"
