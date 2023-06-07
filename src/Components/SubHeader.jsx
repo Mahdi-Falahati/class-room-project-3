@@ -4,8 +4,11 @@ import List from "@mui/material/List";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import BurgerMenu from "./BurgerMenu";
+import { useContext } from "react";
+import { StoreContext } from "../Utils/Store/StoreContext";
 
 export default function SubHeader({ user }) {
+  const { data } = useContext(StoreContext);
   const subHeader = () => {
     return (
       <Grid container columns={12} sx={{ width: "95vw" }}>
@@ -40,11 +43,11 @@ export default function SubHeader({ user }) {
             <ListItemAvatar>
               <Avatar
                 sx={{ background: "purple" }}
-                alt={"Name"}
+                alt={data.username}
                 src={"AvatarSrc"}
               />
             </ListItemAvatar>
-            {user} : Nested List Items
+            {data.username} ({user})
           </ListSubheader>
           <ListSubheader
             component="div"
