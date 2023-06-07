@@ -24,7 +24,7 @@ organizationSchema.pre("save", async function (next) {
 
   const owner = await Owner.findById(organization.owner);
 
-  if (owner) {
+  if (owner && !owner.organizations.includes(organization._id)) {
     owner.organizations.push(organization._id);
     await owner.save();
   }
