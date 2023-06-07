@@ -10,19 +10,28 @@ export default function TeachersList({ user }) {
 
   const Classes = [];
   data.organizations?.forEach((item) => {
+    console.log(item);
     if (item.name === selectInfo.organ) {
       item.classes?.forEach((i) => {
         Classes.push(i);
       });
     }
-  });
+console.log(Classes);  
+});
 
   const Teachers = [];
+  let count=0;
   Classes.forEach((item) => {
+
+    if(item.teacher){
+      count++;
     Teachers.push({
-      userName: item.name?item.name.teacher:"",
+      username: item.teacher.username?item.teacher["username"]:"",
       id: item.teacher?item.teacher["_id"]:"",
     });
+  }
+    console.log(Teachers);
+    console.log(count);
   });
 
   const deleteHandler = (id) => {
@@ -55,7 +64,7 @@ export default function TeachersList({ user }) {
             <InfoContent
               key={index}
               OnDelete={deleteHandler}
-              Name={info.userName}
+              Name={info.username}
               ID={info.id}
             />
           ))}
