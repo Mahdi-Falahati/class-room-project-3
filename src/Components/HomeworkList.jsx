@@ -22,9 +22,9 @@ export default function HomeworkList({ user }) {
     if (item.name === selectInfo.class) {
       item.students[0].homeworks.forEach((i) => {
         Homeworks.push({
-          title: item.teacher.username,
-          id: item.teacher["_id"],
-          descrption:item.descrption
+          title: i.title,
+          id: i["_id"],
+          descrption: i.descrption,
         });
       });
     }
