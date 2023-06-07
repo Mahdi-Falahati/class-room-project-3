@@ -19,6 +19,11 @@ export default function DialogClass() {
   const [title, setTitle] = useState("");
   const [selectOrgan, setSelectOrgan] = useState("");
 
+  const [error, setError] = useState({
+    organ: false,
+    title: false,
+  });
+
   const defaultProps = {
     options: [],
     getOptionLabel: (option) => option.title,
@@ -41,7 +46,14 @@ export default function DialogClass() {
   };
 
   const handleAdd = () => {
-    setOpen(false);
+    if (title.trim() && selectOrgan.trim()) {
+      setError({ organ: false, title: false });
+      setOpen(false);
+    } else if (!title.trim()) {
+      setError({ organ: false, title: true });
+    } else {
+      setError({ organ: true, title: false });
+    }
   };
 
   return (
@@ -74,6 +86,7 @@ export default function DialogClass() {
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <SchoolIcon sx={{ mr: 1, mt: 2 }} />
                 <TextField
+                  error={error.title}
                   value={title}
                   onChange={handleChangeTitle}
                   id="input-with-sx"
@@ -92,6 +105,7 @@ export default function DialogClass() {
                   clearOnEscape
                   renderInput={(params) => (
                     <TextField
+                      error={error.organ}
                       {...params}
                       label="Select Organ"
                       variant="standard"
