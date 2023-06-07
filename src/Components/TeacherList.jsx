@@ -20,8 +20,8 @@ export default function TeachersList({ user }) {
   const Teachers = [];
   Classes.forEach((item) => {
     Teachers.push({
-      userName: item.teacher.username,
-      id: item.teacher["_id"],
+      userName: item.name?item.name.teacher:"",
+      id: item.teacher?item.teacher["_id"]:"",
     });
   });
 
