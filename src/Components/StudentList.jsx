@@ -21,9 +21,10 @@ export default function StudentList() {
   Classes?.forEach((item) => {
     if (item.name === selectInfo.class) {
       item.students?.forEach((i) => {
+        console.log(i);
         Students.push({
-          userName: item.teacher.username,
-          id: item.teacher["_id"],
+          userName: i.username,
+          id: i["_id"],
         });
       });
     }
