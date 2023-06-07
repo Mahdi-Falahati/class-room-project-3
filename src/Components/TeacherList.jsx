@@ -18,11 +18,16 @@ export default function TeachersList({ user }) {
   });
 
   const Teachers = [];
+  let count=0;
   Classes.forEach((item) => {
+    count++;
+    console.log(count);
+    console.log(item.teacher.username);
     Teachers.push({
-      userName: item.name?item.name.teacher:"",
+      username: item.teacher.username?item.teacher["username"]:"",
       id: item.teacher?item.teacher["_id"]:"",
     });
+    console.log(Teachers);
   });
 
   const deleteHandler = (id) => {

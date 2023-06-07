@@ -25,4 +25,12 @@ const getStudent = async (path, info) => {
         console.log(error);
     }
 }
-export { getOrganOwner, getTeacher, getStudent }
+const getOrganization = async (path, id) => {
+    try {
+        const result = await axios.post(baseURL + path, id);
+        return result.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+export { getOrganOwner, getTeacher, getStudent, getOrganization }
