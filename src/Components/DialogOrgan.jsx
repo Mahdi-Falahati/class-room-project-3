@@ -17,6 +17,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 export default function DialogOrgan() {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
+  const [error, setError] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -31,7 +32,12 @@ export default function DialogOrgan() {
   };
 
   const handleAdd = () => {
-    setOpen(false);
+    if (title.trim()) {
+      setError(false);
+      setOpen(false);
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -56,6 +62,7 @@ export default function DialogOrgan() {
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
               <AccountBalanceIcon sx={{ mr: 1, my: 0.5 }} />
               <TextField
+                error={error}
                 value={title}
                 onChange={handleChangeTitle}
                 id="input-with-sx"
