@@ -3,21 +3,25 @@ import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
+import DialogOrgan from "./DialogOrgan";
+import DialogClass from "./DialogClass";
 
 export default function SubHeader({ user }) {
   const subHeader = () => {
     return (
-      <Grid container columns={12}>
+      <Grid container columns={12} sx={{ width: "95vw" }}>
         <Grid
           item
-          columns={2}
+          columns={12}
           sx={{
             display: "flex",
             alignItems: "center",
-            flexDirection: "column",
+            flexDirection: "row",
+            justifyContent: "space-between",
             paddingRight: "0.5rem",
             ml: 3,
             mb: 3,
+            width: "95vw",
           }}
         >
           <ListSubheader
@@ -42,6 +46,23 @@ export default function SubHeader({ user }) {
               />
             </ListItemAvatar>
             {user} : Nested List Items
+          </ListSubheader>
+          <ListSubheader
+            component="div"
+            id="nested-list-subheader"
+            sx={{
+              display: "flex",
+              textAlign: "center",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              letterSpacing: "2px",
+              fontStyle: "italic",
+              fontWeight: "bold",
+            }}
+          >
+            <DialogOrgan />
+            |
+            <DialogClass />
           </ListSubheader>
         </Grid>
       </Grid>
