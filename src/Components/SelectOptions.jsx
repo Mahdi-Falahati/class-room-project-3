@@ -29,14 +29,9 @@ export default function SelectOptionOwner({ user }) {
       id: id,
     });
     organOfStudentArr.push(organOfStudent);
-    console.log("organ name", organOfStudent.name);
-    console.log("organ valueOrganSelect", valueOrganSelect);
-    if (organOfStudent.name === valueOrganSelect) {
-      console.log("shar1");
+    if (organOfStudent.name === selectInfo.organ) {
       data.classes?.map((cls) => {
-        console.log("map");
         if (cls.organization === organOfStudent._id) {
-          console.log("shr2");
           Classes.push(cls);
         }
       });
@@ -103,7 +98,6 @@ export default function SelectOptionOwner({ user }) {
       setIsOrgan(false);
       setError({ ...error, classes: false });
     } else if (!e.target.innerText && !isOrgan && isClass) {
-      console.log("object");
       setIsOrgan(true);
       setIsClass(false);
       setError({ ...error, classes: true });
