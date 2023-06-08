@@ -19,6 +19,7 @@ export default function HomeworkList({ user }) {
   });
 
   const Homeworks = [];
+  //-------- if user was student
   data.homeworks?.map((item) =>
     Homeworks.push({
       title: item.title,
@@ -26,7 +27,8 @@ export default function HomeworkList({ user }) {
       descrption: item.descrption,
     })
   );
-
+  console.log(Classes);
+  // ------------if user was Admin
   Classes?.forEach((item) => {
     console.log(item);
     if (item.name === selectInfo.class) {
@@ -39,6 +41,8 @@ export default function HomeworkList({ user }) {
       });
     }
   });
+
+  // --------------if user was teacher
 
   return (
     <List>
