@@ -24,8 +24,6 @@ export default function SignUp({ user }) {
   const navigate = useNavigate();
   const auth = useAuth();
   const { updateData } = useContext(StoreContext);
-  // const [value, setValue] = useState(options[0]);
-  // const [inputValue, setInputValue] = useState("");
   const [data, dispatchInputData] = useReducer(formReducer, initialValue);
   const [error, setError] = useState({
     username: false,
@@ -50,12 +48,10 @@ export default function SignUp({ user }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(data);
     if (
-      // inputValue.trim() &&
       data.userName.trim() &&
       data.password.trim() &&
-      data.ConfirmPassword.trim()
+      data.confirmPassword.trim()
     ) {
       setError({
         username: false,
@@ -90,12 +86,13 @@ export default function SignUp({ user }) {
         checkPassword: true,
         role: true,
       });
+    }
+    if (data.password === data.confirmPassword) {
       getData(data);
     }
   };
   // --------------------------------get data and change page
   const changPage = (path, flag) => {
-    console.log("check");
     auth.loggedIn(flag);
     navigate(path);
   };
