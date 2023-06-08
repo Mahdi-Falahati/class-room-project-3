@@ -13,12 +13,19 @@ import LoginIcon from "@mui/icons-material/Login";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import PasswordIcon from "@mui/icons-material/Password";
-import { useState, useReducer } from "react";
+import { useState, useReducer, useContext } from "react";
 import { Alert } from "@mui/material";
+import { createOwner } from "../API/API";
+import { StoreContext } from "../Utils/Store/StoreContext";
+import { useAuth } from "../Utils/Auth";
+import { useNavigate } from "react-router-dom";
 
-export default function SignUp() {
-  const [value, setValue] = useState(options[0]);
-  const [inputValue, setInputValue] = useState("");
+export default function SignUp({ user }) {
+  const navigate = useNavigate();
+  const auth = useAuth();
+  const { updateData } = useContext(StoreContext);
+  // const [value, setValue] = useState(options[0]);
+  // const [inputValue, setInputValue] = useState("");
   const [data, dispatchInputData] = useReducer(formReducer, initialValue);
   const [error, setError] = useState({
     username: false,
@@ -43,8 +50,9 @@ export default function SignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(data);
     if (
-      inputValue.trim() &&
+      // inputValue.trim() &&
       data.userName.trim() &&
       data.password.trim() &&
       data.ConfirmPassword.trim()
@@ -82,9 +90,25 @@ export default function SignUp() {
         checkPassword: true,
         role: true,
       });
+      getData(data);
     }
   };
-
+  // --------------------------------get data and change page
+  const changPage = (path, flag) => {
+    console.log("check");
+    auth.loggedIn(flag);
+    navigate(path);
+  };
+  const getData = async (data) => {
+    let flag = false;
+    const organOwner = await createOwner("/organizationOwner", {
+      username: data.userName,
+      password: data.password,
+    });
+    updateData(organOwner);
+    flag = true;
+    changPage("/Owner", flag);
+  };
   // const handleSignUp =(e)=>{
   //   e.preventDefault();
 
@@ -122,7 +146,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   error={error.username}
-                  id="UserName"
+                  id="userName"
                   label="UserName"
                   InputProps={{
                     startAdornment: (
@@ -142,8 +166,8 @@ export default function SignUp() {
                   fullWidth
                   error={error.password}
                   value={data.password}
-                  id="Password"
-                  label="Password"
+                  id="password"
+                  label="password"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -162,8 +186,8 @@ export default function SignUp() {
                   fullWidth
                   error={error.confirmPassword}
                   value={data.confirmPassword}
-                  id="ConfirmPassword"
-                  label="ConfirmPassword"
+                  id="confirmPassword"
+                  label="confirmPassword"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -241,7 +265,7 @@ function Copyright(props) {
 }
 
 const theme = createTheme();
-const options = ["Admin", "Teacher", "Student"];
+// const options = ["Admin", "Teacher", "Student"];
 
 const ActionType = {
   UserName: "__UserName",
