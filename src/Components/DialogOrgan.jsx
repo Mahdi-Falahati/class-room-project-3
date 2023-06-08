@@ -40,7 +40,7 @@ export default function DialogOrgan() {
 
   // -----------create organ
   const createOrg = async (newOrg) => {
-    const createOrgan = await createOrganization("/createorganization", {
+    const createOrgan = await createOrganization("/organizations", {
       name: newOrg.name,
       owner: data["_id"],
     });
