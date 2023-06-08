@@ -40,5 +40,20 @@ const createOwner = async (path, info) => {
     console.log(error);
   }
 };
+const createOrganization = async (path, info) => {
+  try {
+    const result = await axios.post(baseURL + path, info);
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export { getOrganOwner, getTeacher, getStudent, getOrganization, createOwner };
+export {
+  getOrganOwner,
+  getTeacher,
+  getStudent,
+  getOrganization,
+  createOwner,
+  createOrganization,
+};
