@@ -6,7 +6,9 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { Box, TextField } from "@mui/material";
-import { forwardRef, useState } from "react";
+import { forwardRef, useState, useContext, useReducer } from "react";
+import { StoreContext } from "../Utils/Store/StoreContext";
+import { createOrganization } from "../API/API";
 
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 
@@ -18,6 +20,9 @@ export default function DialogOrgan() {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [error, setError] = useState(false);
+  const { data, updateData } = useContext(StoreContext);
+
+  const [newOrg, dispatchNewOrg] = useReducer(formReducer, initialValue);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,17 +34,29 @@ export default function DialogOrgan() {
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
+    dispatchNewOrg({ type: "__Name", value: e.target.value });
+    dispatchNewOrg({ type: "__Owner", value: data["_id"] });
   };
+
+  // -----------create organ
+  const createOrg = async (newOrg) => {
+    const createOrgan = await createOrganization("/createorganization", {
+      name: newOrg.name,
+      owner: data["_id"],
+    });
+    // updateData(data);
+  };
+  // ------------------
 
   const handleAdd = () => {
     if (title.trim()) {
       setError(false);
       setOpen(false);
+      createOrg(newOrg);
     } else {
       setError(true);
     }
   };
-
   return (
     <div>
       <Button color="secondary" onClick={handleClickOpen}>
@@ -63,7 +80,6 @@ export default function DialogOrgan() {
               <AccountBalanceIcon sx={{ mr: 1, my: 0.5 }} />
               <TextField
                 error={error}
-                value={title}
                 onChange={handleChangeTitle}
                 id="input-with-sx"
                 label="Organ Name"
@@ -81,3 +97,19 @@ export default function DialogOrgan() {
     </div>
   );
 }
+
+const formReducer = (state, action) => {
+  switch (action.type) {
+    case "__Name":
+      return { ...state, name: action.value };
+    case "__Owner":
+      return { ...state, owner: action.value };
+    default:
+      break;
+  }
+};
+
+const initialValue = {
+  name: "",
+  owner: "",
+};
