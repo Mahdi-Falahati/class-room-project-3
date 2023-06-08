@@ -68,7 +68,7 @@ export default function Login() {
           username: data.userName,
           password: data.password,
         });
-        updateData(organOwner)
+        updateData(organOwner);
         if (organOwner._id) flag = true;
         changPage("/Owner", flag);
         break;
@@ -77,7 +77,7 @@ export default function Login() {
           username: data.userName,
           password: data.password,
         });
-        updateData(teacher)
+        updateData(teacher);
         if (teacher._id) flag = true;
         changPage("/Teacher", flag);
         break;
@@ -86,13 +86,17 @@ export default function Login() {
           username: data.userName,
           password: data.password,
         });
-        updateData(student)
+        updateData(student);
         if (student._id) flag = true;
         changPage("/Student", flag);
         break;
       default:
         break;
     }
+  };
+  // -------------------
+  const handleSignUp = () => {
+    changPage("/SignUp", true);
   };
 
   return (
@@ -193,8 +197,9 @@ export default function Login() {
             <Grid textAlign="center">
               <Link
                 color="secondary"
-                href="http://localhost:3000/"
+                href="#"
                 underline="none"
+                onClick={handleSignUp}
               >
                 Sign Up
               </Link>
